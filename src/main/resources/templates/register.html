@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>注册页面</title>
+</head>
+<body>
+
+<h2>注册新用户</h2>
+
+<form id="registerForm" action="#" th:action="@{/user/register}" method="post">
+  <div>
+    <label for="name">公司名称:</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+  <div>
+    <label for="email">邮箱地址:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div>
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div>
+    <button type="submit">注册</button>
+  </div>
+</form>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+    document.getElementById('registerForm').onsubmit = function(event) {
+        event.preventDefault();
+        var form = this;
+        var data = {
+            name: form.name.value,
+            email: form.email.value,
+            password: form.password.value
+        };
+
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                // 请求成功，重定向到主界面
+                window.location.href = '/';
+            } else {
+                // 服务器响应了错误状态码
+                return response.json(); // 假设服务器返回的错误信息在响应的JSON中
+            }
+        }).then(errorData => {
+            // 显示错误信息
+            if (errorData && errorData.message) {
+                alert(errorData.message); // 使用alert弹出错误消息，或者将错误消息显示在页面的某个元素中
+            }
+        }).catch(error => {
+            console.error('注册失败:', error);
+            // 在这里处理网络错误（例如请求没有发送出去）
+        });
+    };
+/*]]>*/
+</script>
+
+</body>
+</html>

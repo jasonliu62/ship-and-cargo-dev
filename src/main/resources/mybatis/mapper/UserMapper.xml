@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.UserDao">
+
+    <!-- 插入用户 -->
+    <insert id="insertUser" parameterType="us.dev.shipandcargo.domain.User">
+        INSERT INTO User (name, email, password)
+        VALUES (#{name}, #{email}, #{password})
+    </insert>
+
+    <!-- 通过ID查询用户 -->
+    <select id="selectUserById" parameterType="long" resultType="us.dev.shipandcargo.domain.User">
+        SELECT * FROM User WHERE id = #{id}
+    </select>
+
+    <!-- 通过Email查询用户 -->
+    <select id="selectUserByEmail" parameterType="java.lang.String" resultType="us.dev.shipandcargo.domain.User">
+        SELECT * FROM User WHERE email = #{email}
+    </select>
+
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="us.dev.shipandcargo.domain.User">
+        UPDATE User SET name = #{name}, email = #{email}, password = #{password}, token = #{token} WHERE id = #{id}
+    </update>
+
+    <!-- 通过ID删除用户 -->
+    <delete id="deleteUserById" parameterType="long">
+        DELETE FROM User WHERE id = #{id}
+    </delete>
+
+    <!-- 通过Email删除用户 -->
+    <delete id="deleteUserByEmail" parameterType="java.lang.String">
+        DELETE FROM User WHERE email = #{email}
+    </delete>
+
+    <select id="selectUserByToken" parameterType="java.lang.String" resultType="us.dev.shipandcargo.domain.User">
+        SELECT * FROM User WHERE token = #{token}
+    </select>
+
+</mapper>

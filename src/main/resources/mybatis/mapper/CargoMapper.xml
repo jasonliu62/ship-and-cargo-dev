@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.CargoDao">
+
+    <!-- 插入新货物 -->
+    <insert id="insertCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
+        INSERT INTO Cargo (cargoId, cargoVolume, cargoType, loadPortId, unloadPortId, layDay, company, createdAt, modifiedAt)
+        VALUES (#{cargoId}, #{cargoVolume}, #{cargoType}, #{loadPortId}, #{unloadPortId}, #{layDay}, #{company}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <!-- 根据 ID 查询货物 -->
+    <select id="selectCargoById" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE cargoId = #{cargoId}
+    </select>
+
+    <!-- 根据体积查询货物 -->
+    <select id="selectCargoByVolume" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE cargoVolume = #{cargoVolume}
+    </select>
+
+    <!-- 根据类型查询货物 -->
+    <select id="selectCargoByType" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE cargoType = #{cargoType}
+    </select>
+
+    <!-- 根据装货港查询货物 -->
+    <select id="selectCargoByLoadPort" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE loadPortId = #{loadPortId}
+    </select>
+
+    <!-- 根据卸货港查询货物 -->
+    <select id="selectCargoByUnloadPort" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE unloadPortId = #{unloadPortId}
+    </select>
+
+    <!-- 根据装卸天查询货物 -->
+    <select id="selectCargoByLayday" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE layDay = #{layDay}
+    </select>
+
+    <!-- 根据公司查询货物 -->
+    <select id="selectCargoByCompany" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE company = #{company}
+    </select>
+
+    <!-- 根据 ID 删除货物 -->
+    <delete id="deleteCargoById">
+        DELETE FROM Cargo WHERE cargoId = #{cargoId}
+    </delete>
+
+    <!-- 更新货物信息 -->
+    <update id="updateCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
+        UPDATE Cargo
+        SET cargoVolume = #{cargoVolume}, cargoType = #{cargoType}, loadPortId = #{loadPortId}, unloadPortId = #{unloadPortId},
+        layDay = #{layDay}, company = #{company}, createdAt = #{createdAt}, modifiedAt = #{modifiedAt}
+        WHERE cargoId = #{cargoId}
+    </update>
+
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo
+        <where>
+            <if test="cargoId != null">
+                AND cargoId = #{cargoId}
+            </if>
+            <if test="cargoVolume != null">
+                AND cargoVolume = #{cargoVolume}
+            </if>
+            <if test="cargoType != null and cargoType != ''">
+                AND cargoType = #{cargoType}
+            </if>
+            <if test="loadPortId != null">
+                AND loadPortId = #{loadPortId}
+            </if>
+            <if test="unloadPortId != null">
+                AND unloadPortId = #{unloadPortId}
+            </if>
+            <if test="layDay != null">
+                AND layDay = #{layDay}
+            </if>
+            <if test="company != null and company != ''">
+                AND company = #{company}
+            </if>
+        </where>
+        <if test="sortByList!=null">
+            order by
+            <foreach collection="sortByList" item="item" index="index"
+                     open="" close="" separator=",">
+                ${item.sortName} ${item.sortOrder}
+            </foreach>
+        </if>
+    </select>
+
+
+</mapper>
