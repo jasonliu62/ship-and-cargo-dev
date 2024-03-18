@@ -4,8 +4,8 @@
 
     <!-- 插入新货物 -->
     <insert id="insertCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
-        INSERT INTO Cargo (cargoId, cargoVolume, cargoType, loadPortId, unloadPortId, layDay, company, createdAt, modifiedAt)
-        VALUES (#{cargoId}, #{cargoVolume}, #{cargoType}, #{loadPortId}, #{unloadPortId}, #{layDay}, #{company}, #{createdAt}, #{modifiedAt})
+        INSERT INTO Cargo (cargoId, cargoVolume, cargoType, loadPortId, unloadPortId, layDay, company, createdAt, modifiedAt, status)
+        VALUES (#{cargoId}, #{cargoVolume}, #{cargoType}, #{loadPortId}, #{unloadPortId}, #{layDay}, #{company}, #{createdAt}, #{modifiedAt}, #{status})
     </insert>
 
     <!-- 根据 ID 查询货物 -->
@@ -52,7 +52,7 @@
     <update id="updateCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
         UPDATE Cargo
         SET cargoVolume = #{cargoVolume}, cargoType = #{cargoType}, loadPortId = #{loadPortId}, unloadPortId = #{unloadPortId},
-        layDay = #{layDay}, company = #{company}, createdAt = #{createdAt}, modifiedAt = #{modifiedAt}
+        layDay = #{layDay}, company = #{company}, createdAt = #{createdAt}, modifiedAt = #{modifiedAt}, status = #{status}
         WHERE cargoId = #{cargoId}
     </update>
 
@@ -79,6 +79,9 @@
             </if>
             <if test="company != null and company != ''">
                 AND company = #{company}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
             </if>
         </where>
         <if test="sortByList!=null">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import us.dev.shipandcargo.domain.Cargo;
 import us.dev.shipandcargo.domain.Result;
+import us.dev.shipandcargo.enums.CargoDisplayEnum;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.service.CargoService;
 import us.dev.shipandcargo.util.ResultUtil;
@@ -25,13 +26,14 @@ public class CargoController {
 
     @ApiOperation(value = "insert cargo")
     @PostMapping("/insert")
-    public Result<?> insertCargo(@ApiParam(value = "cargoId") Long cargoId,
-                                 @ApiParam(value = "cargoVolume") Long cargoVolume,
-                                 @ApiParam(value = "cargoType") String cargoType,
-                                 @ApiParam(value = "loadPortId") Long loadPortId,
-                                 @ApiParam(value = "unloadPortId") Long unloadPortId,
-                                 @ApiParam(value = "layDay") Long layDay,
-                                 @ApiParam(value = "company") String company) {
+    public Result<?> insertCargo(@ApiParam(value = "cargoId", required = true) Long cargoId,
+                                 @ApiParam(value = "cargoVolume", required = true) Long cargoVolume,
+                                 @ApiParam(value = "cargoType", required = true) String cargoType,
+                                 @ApiParam(value = "loadPortId", required = true) Long loadPortId,
+                                 @ApiParam(value = "unloadPortId", required = true) Long unloadPortId,
+                                 @ApiParam(value = "layDay", required = true) Long layDay,
+                                 @ApiParam(value = "company", required = true) String company,
+                                 @ApiParam(value = "status", required = true) CargoDisplayEnum status) {
         Cargo cargo = new Cargo();
         cargo.setCargoId(cargoId);
         cargo.setCargoVolume(cargoVolume);
@@ -40,6 +42,7 @@ public class CargoController {
         cargo.setUnloadPortId(unloadPortId);
         cargo.setLayDay(layDay);
         cargo.setCompany(company);
+        cargo.setStatus(status);
         return ResultUtil.success(cargoService.insertCargo(cargo));
     }
 
@@ -52,9 +55,8 @@ public class CargoController {
                                          @ApiParam(value = "loadPortId") Long loadPortId,
                                          @ApiParam(value = "unloadPortId") Long unloadPortId,
                                          @ApiParam(value = "layDay") Long layDay,
-                                         @ApiParam(value = "company") String company
-    // 加个几把合同种类
-    ) {
+                                         @ApiParam(value = "company") String company,
+                                         @ApiParam(value = "status", required = true) CargoDisplayEnum status) {
         return ResultUtil.success(cargoService.listCargo(pagination,
                 cargoId,
                 cargoVolume,
@@ -62,7 +64,8 @@ public class CargoController {
                 loadPortId,
                 unloadPortId,
                 layDay,
-                company));
+                company,
+                status));
     }
 
 }

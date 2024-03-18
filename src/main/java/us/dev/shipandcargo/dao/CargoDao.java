@@ -3,6 +3,7 @@ package us.dev.shipandcargo.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import us.dev.shipandcargo.domain.Cargo;
+import us.dev.shipandcargo.enums.CargoDisplayEnum;
 import us.dev.shipandcargo.request.paging.PaginationOrderQuery;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public interface CargoDao {
                                  @Param("unloadPortId") Long unloadPortId,
                                  @Param("layDay") Long layDay,
                                  @Param("company") String company,
+                                 @Param("status") CargoDisplayEnum status,
                                  @Param("sortByList") List<PaginationOrderQuery> sortBy);
 
 }

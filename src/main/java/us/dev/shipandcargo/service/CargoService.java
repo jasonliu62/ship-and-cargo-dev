@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import us.dev.shipandcargo.Vo.CargoVo;
 import us.dev.shipandcargo.dao.CargoDao;
 import us.dev.shipandcargo.domain.Cargo;
+import us.dev.shipandcargo.enums.CargoDisplayEnum;
 import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
@@ -54,10 +55,10 @@ public class CargoService {
     }
 
     public PageData<CargoVo> listCargo(PaginationProps paging, Long cargoId, Long cargoVolume, String cargoType, Long loadPortId, Long unloadPortId,
-                                     Long layDay, String company) {
+                                     Long layDay, String company, CargoDisplayEnum status) {
         PageHelper.startPage(paging.getCurrent(), paging.getPageSize());
         List<Cargo> cargos =  cargoDao.queryByCondition(cargoId, cargoVolume, cargoType, loadPortId, unloadPortId,
-                layDay, company,paging.getSortByToList());
+                layDay, company, status, paging.getSortByToList());
         if (cargos.size() == 0) {
             return PageDataUtil.convertToPageData(new ArrayList<CargoVo>());
         }

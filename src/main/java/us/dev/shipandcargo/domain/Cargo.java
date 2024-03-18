@@ -3,6 +3,7 @@ package us.dev.shipandcargo.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import us.dev.shipandcargo.enums.CargoDisplayEnum;
 
 import java.util.Date;
 
@@ -18,6 +19,7 @@ public class Cargo {
     private Long layDay;
     private String company;
     // private 虚拟，实际，即期
+    private CargoDisplayEnum status;
 
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
