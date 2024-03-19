@@ -4,61 +4,149 @@
 
     <!-- 插入新货物 -->
     <insert id="insertCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
-        INSERT INTO Cargo (cargoId, cargoVolume, cargoType, loadPortId, unloadPortId, layDay, company, createdAt, modifiedAt, status)
-        VALUES (#{cargoId}, #{cargoVolume}, #{cargoType}, #{loadPortId}, #{unloadPortId}, #{layDay}, #{company}, #{createdAt}, #{modifiedAt}, #{status})
+        INSERT INTO Cargo (
+        contractNumber, contractType, cargoId, cargoVolume, cargoType, cargoflowArea,
+        loadPortId, unloadPortId, layDay, dischargeDay, freightRate,
+        volumeRate, loadportDepth, unloadportDepth, voyageNumber,
+        voyageVolume, voyagePeriod, status, createdAt, modifiedAt
+        )
+        VALUES (
+        #{contractNumber}, #{contractType}, #{cargoId}, #{cargoVolume}, #{cargoType}, #{cargoflowArea},
+        #{loadPortId}, #{unloadPortId}, #{layDay}, #{dischargeDay}, #{freightRate},
+        #{volumeRate}, #{loadportDepth}, #{unloadportDepth}, #{voyageNumber},
+        #{voyageVolume}, #{voyagePeriod}, #{status}, #{createdAt}, #{modifiedAt}
+        )
     </insert>
 
-    <!-- 根据 ID 查询货物 -->
-    <select id="selectCargoById" resultType="us.dev.shipandcargo.domain.Cargo">
+    <!-- 根据合同ID查询货物记录 -->
+    <select id="selectCargoByContractNumber" parameterType="long" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE contractNumber = #{contractNumber}
+    </select>
+
+    <!-- 根据ID查询货物记录 -->
+    <select id="selectCargoById" parameterType="long" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo WHERE cargoId = #{cargoId}
     </select>
 
-    <!-- 根据体积查询货物 -->
+    <!-- 根据合同种类查询货物记录 -->
+    <select id="selectCargoByContractType" parameterType="java.lang.String" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE contractType = #{contractType}
+    </select>
+
+    <!-- 根据体积查询货物记录 -->
     <select id="selectCargoByVolume" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo WHERE cargoVolume = #{cargoVolume}
     </select>
 
-    <!-- 根据类型查询货物 -->
+    <!-- 根据类型查询货物记录 -->
     <select id="selectCargoByType" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo WHERE cargoType = #{cargoType}
     </select>
 
-    <!-- 根据装货港查询货物 -->
-    <select id="selectCargoByLoadPort" resultType="us.dev.shipandcargo.domain.Cargo">
+    <!-- 根据货物流动区域查询货物记录 -->
+    <select id="selectCargoByCargoFlowArea" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE cargoflowArea = #{cargoflowArea}
+    </select>
+
+    <!-- 根据装货港ID查询货物记录 -->
+    <select id="selectCargoByLoadPortId" parameterType="java.lang.String" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo WHERE loadPortId = #{loadPortId}
     </select>
 
-    <!-- 根据卸货港查询货物 -->
-    <select id="selectCargoByUnloadPort" resultType="us.dev.shipandcargo.domain.Cargo">
+    <!-- 根据卸货港ID查询货物记录 -->
+    <select id="selectCargoByUnloadPortId" parameterType="java.lang.String" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo WHERE unloadPortId = #{unloadPortId}
     </select>
 
-    <!-- 根据装卸天查询货物 -->
-    <select id="selectCargoByLayday" resultType="us.dev.shipandcargo.domain.Cargo">
+    <!-- 根据装货日期查询货物记录 -->
+    <select id="selectCargoByLayDay" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo WHERE layDay = #{layDay}
     </select>
 
-    <!-- 根据公司查询货物 -->
-    <select id="selectCargoByCompany" resultType="us.dev.shipandcargo.domain.Cargo">
-        SELECT * FROM Cargo WHERE company = #{company}
+    <!-- 根据卸货日期查询货物记录 -->
+    <select id="selectCargoByDischargeDay" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE dischargeDay = #{dischargeDay}
     </select>
 
-    <!-- 根据 ID 删除货物 -->
-    <delete id="deleteCargoById">
+    <!-- 根据运费率查询货物记录 -->
+    <select id="selectCargoByFreightRate" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE freightRate = #{freightRate}
+    </select>
+
+    <!-- 根据载运差价查询货物记录 -->
+    <select id="selectCargoByVolumeRate" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE volumeRate = #{volumeRate}
+    </select>
+
+    <!-- 根据装货港深度查询货物记录 -->
+    <select id="selectCargoByLoadportDepth" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE loadportDepth = #{loadportDepth}
+    </select>
+
+    <!-- 根据卸货港深度查询货物记录 -->
+    <select id="selectCargoByUnloadportDepth" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE unloadportDepth = #{unloadportDepth}
+    </select>
+
+    <!-- 根据航次编号查询货物记录 -->
+    <select id="selectCargoByVoyageNumber" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE voyageNumber = #{voyageNumber}
+    </select>
+
+    <!-- 根据航次体积查询货物记录 -->
+    <select id="selectCargoByVoyageVolume" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE voyageVolume = #{voyageVolume}
+    </select>
+
+    <!-- 根据航次期间查询货物记录 -->
+    <select id="selectCargoByVoyagePeriod" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE voyagePeriod = #{voyagePeriod}
+    </select>
+
+    <!-- 根据货物显示状态查询货物记录 -->
+    <select id="selectCargoByStatus" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT * FROM Cargo WHERE status = #{status.ordinal()}
+    </select>
+
+    <!-- 更新货物记录 -->
+    <update id="updateCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
+        UPDATE Cargo
+        SET contractNumber = #{contractNumber},
+        contractType = #{contractType},
+        cargoVolume = #{cargoVolume},
+        cargoType = #{cargoType},
+        cargoflowArea = #{cargoflowArea},
+        loadPortId = #{loadPortId},
+        unloadPortId = #{unloadPortId},
+        layDay = #{layDay},
+        dischargeDay = #{dischargeDay},
+        freightRate = #{freightRate},
+        volumeRate = #{volumeRate},
+        loadportDepth = #{loadportDepth},
+        unloadportDepth = #{unloadportDepth},
+        voyageNumber = #{voyageNumber},
+        voyageVolume = #{voyageVolume},
+        voyagePeriod = #{voyagePeriod},
+        status = #{status.ordinal()},
+        modifiedAt = NOW()  <!-- Assuming your SQL dialect supports NOW() for the current timestamp -->
+        WHERE cargoId = #{cargoId}
+    </update>
+
+    <!-- 删除货物记录 -->
+    <delete id="deleteCargoById" parameterType="long">
         DELETE FROM Cargo WHERE cargoId = #{cargoId}
     </delete>
 
-    <!-- 更新货物信息 -->
-    <update id="updateCargo" parameterType="us.dev.shipandcargo.domain.Cargo">
-        UPDATE Cargo
-        SET cargoVolume = #{cargoVolume}, cargoType = #{cargoType}, loadPortId = #{loadPortId}, unloadPortId = #{unloadPortId},
-        layDay = #{layDay}, company = #{company}, createdAt = #{createdAt}, modifiedAt = #{modifiedAt}, status = #{status}
-        WHERE cargoId = #{cargoId}
-    </update>
 
     <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.Cargo">
         SELECT * FROM Cargo
         <where>
+            <if test="contractNumber != null">
+                AND contractNumber = #{contractNumber}
+            </if>
+            <if test="contractType != null and contractType != ''">
+                AND contractType = #{contractType}
+            </if>
             <if test="cargoId != null">
                 AND cargoId = #{cargoId}
             </if>
@@ -68,30 +156,55 @@
             <if test="cargoType != null and cargoType != ''">
                 AND cargoType = #{cargoType}
             </if>
-            <if test="loadPortId != null">
+            <if test="cargoflowArea != null and cargoflowArea != ''">
+                AND cargoflowArea = #{cargoflowArea}
+            </if>
+            <if test="loadPortId != null and loadPortId != ''">
                 AND loadPortId = #{loadPortId}
             </if>
-            <if test="unloadPortId != null">
+            <if test="unloadPortId != null and unloadPortId != ''">
                 AND unloadPortId = #{unloadPortId}
             </if>
             <if test="layDay != null">
                 AND layDay = #{layDay}
             </if>
-            <if test="company != null and company != ''">
-                AND company = #{company}
+            <if test="dischargeDay != null">
+                AND dischargeDay = #{dischargeDay}
+            </if>
+            <if test="freightRate != null">
+                AND freightRate = #{freightRate}
+            </if>
+            <if test="volumeRate != null">
+                AND volumeRate = #{volumeRate}
+            </if>
+            <if test="loadportDepth != null">
+                AND loadportDepth = #{loadportDepth}
+            </if>
+            <if test="unloadportDepth != null">
+                AND unloadportDepth = #{unloadportDepth}
+            </if>
+            <if test="voyageNumber != null">
+                AND voyageNumber = #{voyageNumber}
+            </if>
+            <if test="voyageVolume != null">
+                AND voyageVolume = #{voyageVolume}
+            </if>
+            <if test="voyagePeriod != null">
+                AND voyagePeriod = #{voyagePeriod}
             </if>
             <if test="status != null">
                 AND status = #{status}
             </if>
         </where>
-        <if test="sortByList!=null">
+        <if test="sortByList!=null and !sortByList.isEmpty()">
             order by
             <foreach collection="sortByList" item="item" index="index"
-                     open="" close="" separator=",">
+                     separator=",">
                 ${item.sortName} ${item.sortOrder}
             </foreach>
         </if>
     </select>
+
 
 
 </mapper>

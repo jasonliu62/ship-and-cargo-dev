@@ -40,6 +40,4 @@ public class UserController {
     public Result<?> delete(@RequestParam String email) {
         return ResultUtil.success(userService.deleteUserByEmail(email));
     }
-
-
 }

@@ -33,7 +33,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             }
         }
 
-        response.sendRedirect("/login");
+        // response.sendRedirect("/");
 
 
         return false; // 继续处理请求

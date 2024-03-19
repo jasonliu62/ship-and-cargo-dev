@@ -13,13 +13,26 @@ import java.util.Date;
 @Setter
 @ApiModel(value = "CargoVo", description = "Basic info of the cargo")
 public class CargoVo {
+    private Long contractNumber;
+    private String contractType;
     private Long cargoId;
-    private Long cargoVolume;
+    private Float cargoVolume;
     private String cargoType;
-    private Long loadPortId;
-    private Long unloadPortId;
-    private Long layDay;
-    private String company;
+    private String cargoflowArea;
+    private String loadPortId;
+    private String unloadPortId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date layDay;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date dischargeDay;
+    private Float freightRate;
+    private Float volumeRate;
+    private Float loadportDepth;
+    private Float unloadportDepth;
+    private Long voyageNumber;
+    private Float voyageVolume;
+    private Float voyagePeriod;
+    private int status;
     private Date createdAt;
     private Date modifiedAt;
 }

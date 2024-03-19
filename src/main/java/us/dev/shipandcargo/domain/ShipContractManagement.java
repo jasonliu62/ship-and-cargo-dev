@@ -10,6 +10,9 @@ import java.util.Date;
 @Setter
 public class ShipContractManagement {
 
+    // 货物合同编号
+    // 货物合同的利润
+
     private Long imo;
     private Long contractId;
     // 预估和实际利润

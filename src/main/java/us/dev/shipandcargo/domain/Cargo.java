@@ -3,7 +3,6 @@ package us.dev.shipandcargo.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import us.dev.shipandcargo.enums.CargoDisplayEnum;
 
 import java.util.Date;
 
@@ -11,16 +10,35 @@ import java.util.Date;
 @Setter
 public class Cargo {
 
+    private Long contractNumber;
+    private String contractType;
     private Long cargoId;
-    private Long cargoVolume;
+    private Float cargoVolume;
     private String cargoType;
-    private Long loadPortId;
-    private Long unloadPortId;
-    private Long layDay;
-    private String company;
-    // private 虚拟，实际，即期
-    private CargoDisplayEnum status;
+    // 从苏州运到休斯顿
+    private String cargoflowArea;
+    private String loadPortId;
+    private String unloadPortId;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date layDay;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date dischargeDay;
+
+    // 运费率
+    private Float freightRate;
+    // 载运差价
+    private Float volumeRate;
+    private Float loadportDepth;
+    private Float unloadportDepth;
+    private Long voyageNumber;
+    private Float voyageVolume;
+
+    private Float voyagePeriod;
+
+    // private String company;
+    // private 0: 实际，1: 虚拟，2: 即期
+    private int status;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;
