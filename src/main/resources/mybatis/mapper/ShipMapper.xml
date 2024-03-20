@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.ShipDao">
+
+    <!-- Insert a new ship -->
+    <insert id="insertShip" parameterType="us.dev.shipandcargo.domain.Ship">
+        INSERT INTO Ship (imo, deadWeight, shipType, shipName, shipConstant, deadDraft, emptyDraft, ballastDraft, shipCubic, flagState, shipTag, owner, operator, uploaderId)
+        VALUES (#{imo}, #{deadWeight}, #{shipType}, #{shipName}, #{shipConstant}, #{deadDraft}, #{emptyDraft}, #{ballastDraft}, #{shipCubic}, #{flagState}, #{shipTag}, #{owner}, #{operator}, #{uploaderId})
+    </insert>
+
+    <!-- Select a ship by IMO -->
+    <select id="selectShipByImo" parameterType="long" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE imo = #{imo}
+    </select>
+
+    <!-- Select ships by dead weight -->
+    <select id="selectShipByDeadWeight" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE deadWeight = #{deadWeight}
+    </select>
+
+    <!-- Select ships by ship type -->
+    <select id="selectShipByShipType" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE shipType = #{shipType}
+    </select>
+
+    <!-- Select ships by ship name -->
+    <select id="selectShipByShipName" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE shipName = #{shipName}
+    </select>
+
+    <!-- Select ships by ship constant -->
+    <select id="selectShipByShipConstant" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE shipConstant = #{shipConstant}
+    </select>
+
+    <!-- Select ships by dead draft -->
+    <select id="selectShipByDeadDraft" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE deadDraft = #{deadDraft}
+    </select>
+
+    <!-- Select ships by empty draft -->
+    <select id="selectShipByEmptyDraft" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE emptyDraft = #{emptyDraft}
+    </select>
+
+    <!-- Select ships by ballast draft -->
+    <select id="selectShipByBallastDraft" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE ballastDraft = #{ballastDraft}
+    </select>
+
+    <!-- Select ships by ship cubic -->
+    <select id="selectShipByShipCubic" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE shipCubic = #{shipCubic}
+    </select>
+
+    <!-- Select ships by flag state -->
+    <select id="selectShipByFlagState" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE flagState = #{flagState}
+    </select>
+
+    <!-- Select ships by ship tag -->
+    <select id="selectShipByShipTag" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE shipTag = #{shipTag}
+    </select>
+
+    <!-- Select ships by owner -->
+    <select id="selectShipByOwner" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE owner = #{owner}
+    </select>
+
+    <!-- Select ships by operator -->
+    <select id="selectShipByOperator" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE operator = #{operator}
+    </select>
+
+    <!-- Select ships by uploader ID -->
+    <select id="selectShipByUploaderId" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE uploaderId = #{uploaderId}
+    </select>
+
+    <!-- Update a ship -->
+    <update id="updateShip" parameterType="us.dev.shipandcargo.domain.Ship">
+        UPDATE Ship SET
+        deadWeight = #{deadWeight},
+        shipType = #{shipType},
+        shipName = #{shipName},
+        shipConstant = #{shipConstant},
+        deadDraft = #{deadDraft},
+        emptyDraft = #{emptyDraft},
+        ballastDraft = #{ballastDraft},
+        shipCubic = #{shipCubic},
+        flagState = #{flagState},
+        shipTag = #{shipTag},
+        owner = #{owner},
+        operator = #{operator},
+        uploaderId = #{uploaderId}
+        WHERE imo = #{imo}
+    </update>
+
+    <!-- Delete a ship by IMO -->
+    <delete id="deleteShipByImo" parameterType="long">
+        DELETE FROM Ship WHERE imo = #{imo}
+    </delete>
+
+    <!-- Query by Condition -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship
+        <where>
+            <if test="imo != null">
+                AND imo = #{imo}
+            </if>
+            <if test="deadWeight != null">
+                AND deadWeight = #{deadWeight}
+            </if>
+            <if test="shipType != null">
+                AND shipType = #{shipType}
+            </if>
+            <if test="shipName != null">
+                AND shipName = #{shipName}
+            </if>
+            <if test="shipConstant != null">
+                AND shipConstant = #{shipConstant}
+            </if>
+            <if test="deadDraft != null">
+                AND deadDraft = #{deadDraft}
+            </if>
+            <if test="emptyDraft != null">
+                AND emptyDraft = #{emptyDraft}
+            </if>
+            <if test="ballastDraft != null">
+                AND ballastDraft = #{ballastDraft}
+            </if>
+            <if test="shipCubic != null">
+                AND shipCubic = #{shipCubic}
+            </if>
+            <if test="flagState != null">
+                AND flagState = #{flagState}
+            </if>
+            <if test="shipTag != null">
+                AND shipTag = #{shipTag}
+            </if>
+            <if test="owner != null">
+                AND owner = #{owner}
+            </if>
+            <if test="operator != null">
+                AND operator = #{operator}
+            </if>
+            <if test="uploaderId != null">
+                AND (uploaderId = #{uploaderId} OR uploaderId = 0)
+            </if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
+    </select>
+</mapper>
+
+

@@ -1,6 +1,5 @@
-package us.dev.shipandcargo.domain;
+package us.dev.shipandcargo.Vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,11 +7,12 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class Ship {
+public class ShipVo {
 
     private Long imo;
     // 船舶定额载重吨
     private Float deadWeight;
+    // 如果shipType就固定几艘，此处要写成enum的形式，用int来表示，下拉菜单enum
     private String shipType;
     private String shipName;
     // 船舶常定重量
@@ -30,12 +30,7 @@ public class Ship {
     private String owner;
     private String operator;
     private Long uploaderId;
-
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date modifiedAt;
-
-
 
 }

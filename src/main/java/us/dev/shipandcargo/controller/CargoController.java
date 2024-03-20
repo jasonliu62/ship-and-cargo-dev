@@ -5,10 +5,12 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import us.dev.shipandcargo.Vo.CargoVo;
 import us.dev.shipandcargo.domain.Cargo;
 import us.dev.shipandcargo.domain.Result;
 import us.dev.shipandcargo.request.CargoInsertReqBody;
 import us.dev.shipandcargo.request.CargoReqBody;
+import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.service.CargoService;
 import us.dev.shipandcargo.util.ResultUtil;
 
@@ -48,7 +50,7 @@ public class CargoController {
 
     @ApiOperation(value = "cargo list")
     @GetMapping("/list")
-    public Result<List<Cargo>> listCargo(@RequestBody CargoReqBody cargoReqBody) {
+    public Result<PageData<CargoVo>> listCargo(@RequestBody CargoReqBody cargoReqBody) {
         return ResultUtil.success(cargoService.listCargo(
                 cargoReqBody.getPagination(),
                 cargoReqBody.getContractNumber(),
