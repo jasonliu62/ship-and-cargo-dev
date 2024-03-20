@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.util.Date;
 @Getter
 @Setter
+@Deprecated
 public class ShipContractDetail {
 
     private Long imo;
