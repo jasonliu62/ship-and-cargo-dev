@@ -21,15 +21,19 @@ public class ShipManagementInsertReqBody {
     private Long imo;
 
     @ApiModelProperty(example = "150.5", value = "Ship operating day")
+    @NotEmpty(message = "Please fill")
     private Float shipOperatingDay;
 
     @ApiModelProperty(example = "250.75", value = "Ship total time")
+    @NotEmpty(message = "Please fill")
     private Float shipTotalTime;
 
     @ApiModelProperty(example = "1000.0", value = "Daily capital cost")
+    @NotEmpty(message = "Please fill")
     private Float dailyCapitalCost;
 
     @ApiModelProperty(example = "800.0", value = "Daily operating cost")
+    @NotEmpty(message = "Please fill")
     private Float dailyOperatingCost;
 
     @ApiModelProperty(example = "Bulk Cargo", value = "Acceptable cargo type")
@@ -60,6 +64,4 @@ public class ShipManagementInsertReqBody {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shipEmptyTime;
 
-    @ApiModelProperty(example = "123", value = "Uploader ID")
-    private Long uploaderId;
 }

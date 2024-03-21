@@ -60,7 +60,4 @@ public class ShipManagementReqBody {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shipEmptyTime;
 
-    @ApiModelProperty(example = "123", value = "Uploader ID")
-    private Long uploaderId;
-
 }

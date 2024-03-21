@@ -21,7 +21,7 @@ import us.dev.shipandcargo.service.UserService;
 
 @RestController
 @Api(tags = {"Ship Management Module"})
-@RequestMapping(value = "/shipManagement")
+@RequestMapping(value = "/ship-management")
 public class ShipManagementController {
 
     @Autowired
@@ -52,11 +52,11 @@ public class ShipManagementController {
         shipManagement.setShipDepartment(reqBody.getShipDepartment());
         shipManagement.setShipEmptyPort(reqBody.getShipEmptyPort());
         shipManagement.setShipEmptyTime(reqBody.getShipEmptyTime());
-        shipManagement.setUploaderId(reqBody.getUploaderId());
+        shipManagement.setUploaderId(uploaderId);
         return Result.success(shipManagementService.insertShipManagement(shipManagement));
     }
     @ApiOperation(value = "list ship management")
-    @GetMapping("/list")
+    @PostMapping("/list")
     public Result<PageData<ShipManagementVo>> listShipManagement(
             @Valid
             HttpServletRequest request,

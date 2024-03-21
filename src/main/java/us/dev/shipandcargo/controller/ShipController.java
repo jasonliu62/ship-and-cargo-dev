@@ -58,7 +58,7 @@ public class ShipController {
     }
 
     @ApiOperation(value = "list ship")
-    @GetMapping("/list")
+    @PostMapping("/list")
     public Result<PageData<ShipVo>> listShip(
             @Valid
             HttpServletRequest request,

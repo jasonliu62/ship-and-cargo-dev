@@ -117,20 +117,27 @@
     <!-- Query ShipManagement by Condition -->
     <select id="queryByCondition" parameterType="map" resultType="us.dev.shipandcargo.domain.ShipManagement">
         SELECT * FROM ShipManagement
-        WHERE 1=1
-        <if test="imo != null">AND imo = #{imo}</if>
-        <if test="shipOperatingDay != null">AND shipOperatingDay = #{shipOperatingDay}</if>
-        <if test="shipTotalTime != null">AND shipTotalTime = #{shipTotalTime}</if>
-        <if test="dailyCapitalCost != null">AND dailyCapitalCost = #{dailyCapitalCost}</if>
-        <if test="dailyOperatingCost != null">AND dailyOperatingCost = #{dailyOperatingCost}</if>
-        <if test="acceptableCargoType != null">AND acceptableCargoType = #{acceptableCargoType}</if>
-        <if test="owner != null">AND owner = #{owner}</if>
-        <if test="operator != null">AND operator = #{operator}</if>
-        <if test="navigationArea != null">AND navigationArea = #{navigationArea}</if>
-        <if test="shipDepartment != null">AND shipDepartment = #{shipDepartment}</if>
-        <if test="shipEmptyPort != null">AND shipEmptyPort = #{shipEmptyPort}</if>
-        <if test="shipEmptyTime != null">AND shipEmptyTime = #{shipEmptyTime}</if>
-        <if test="uploaderId != null">AND uploaderId = #{uploaderId}</if>
+        <where>
+            <if test="imo != null">AND imo = #{imo}</if>
+            <if test="shipOperatingDay != null">AND shipOperatingDay = #{shipOperatingDay}</if>
+            <if test="shipTotalTime != null">AND shipTotalTime = #{shipTotalTime}</if>
+            <if test="dailyCapitalCost != null">AND dailyCapitalCost = #{dailyCapitalCost}</if>
+            <if test="dailyOperatingCost != null">AND dailyOperatingCost = #{dailyOperatingCost}</if>
+            <if test="acceptableCargoType != null">AND acceptableCargoType = #{acceptableCargoType}</if>
+            <if test="owner != null">AND owner = #{owner}</if>
+            <if test="operator != null">AND operator = #{operator}</if>
+            <if test="navigationArea != null">AND navigationArea = #{navigationArea}</if>
+            <if test="shipDepartment != null">AND shipDepartment = #{shipDepartment}</if>
+            <if test="shipEmptyPort != null">AND shipEmptyPort = #{shipEmptyPort}</if>
+            <if test="shipEmptyTime != null">AND shipEmptyTime = #{shipEmptyTime}</if>
+            <if test="uploaderId != null">AND (uploaderId = #{uploaderId} OR uploaderId = 0)</if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
     </select>
 
 </mapper>
