@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @Api(tags = {"Cargo Module"})
 @RequestMapping(value = "/cargo")
+@CrossOrigin
 public class CargoController {
     @Autowired
     private CargoService cargoService;
@@ -49,7 +50,7 @@ public class CargoController {
     }
 
     @ApiOperation(value = "cargo list")
-    @GetMapping("/list")
+    @PostMapping ("/list")
     public Result<PageData<CargoVo>> listCargo(@RequestBody CargoReqBody cargoReqBody) {
         return ResultUtil.success(cargoService.listCargo(
                 cargoReqBody.getPagination(),

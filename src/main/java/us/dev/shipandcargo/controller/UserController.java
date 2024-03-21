@@ -25,7 +25,7 @@ public class UserController {
         String password = reqBody.getPassword();
         String email = reqBody.getEmail();
         String name = reqBody.getName();
-        System.out.println(password + email + name);
+        //System.out.println(password + email + name);
         return ResultUtil.success(userService.registerUser(email, password, name));
     }
 
@@ -34,7 +34,7 @@ public class UserController {
     public Result<?> login(@RequestBody LoginReqBody reqBody) {
         String password = reqBody.getPassword();
         String email = reqBody.getEmail();
-        System.out.println(password + email);
+        //System.out.println(password + email);
         return ResultUtil.success(userService.login(email, password));
     }
 
