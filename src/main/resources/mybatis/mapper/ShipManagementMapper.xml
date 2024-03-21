@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.ShipManagementDao">
+
+    <!-- Insert ShipManagement -->
+    <insert id="insertShipManagement" parameterType="us.dev.shipandcargo.domain.ShipManagement">
+        INSERT INTO ShipManagement (
+        imo, shipOperatingDay, shipTotalTime, dailyCapitalCost, dailyOperatingCost,
+        acceptableCargoType, owner, operator, navigationArea, shipDepartment, shipEmptyPort,
+        shipEmptyTime, uploaderId
+        )
+        VALUES (
+        #{imo}, #{shipOperatingDay}, #{shipTotalTime}, #{dailyCapitalCost}, #{dailyOperatingCost},
+        #{acceptableCargoType}, #{owner}, #{operator}, #{navigationArea}, #{shipDepartment}, #{shipEmptyPort},
+        #{shipEmptyTime}, #{uploaderId}
+        )
+    </insert>
+
+    <!-- Select ShipManagement by IMO -->
+    <select id="selectShipManagementByImo" parameterType="Long" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE imo = #{imo}
+    </select>
+
+    <!-- Select ShipManagement by Ship Operating Day -->
+    <select id="selectShipManagementByShipOperatingDay" parameterType="Float" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE shipOperatingDay = #{shipOperatingDay}
+    </select>
+
+    <!-- Select ShipManagement by Ship Total Time -->
+    <select id="selectShipManagementByShipTotalTime" parameterType="Float" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE shipTotalTime = #{shipTotalTime}
+    </select>
+
+    <!-- Select ShipManagement by Daily Capital Cost -->
+    <select id="selectShipManagementByDailyCapitalCost" parameterType="Float" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE dailyCapitalCost = #{dailyCapitalCost}
+    </select>
+
+    <!-- Select ShipManagement by Daily Operating Cost -->
+    <select id="selectShipManagementByDailyOperatingCost" parameterType="Float" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE dailyOperatingCost = #{dailyOperatingCost}
+    </select>
+
+    <!-- Select ShipManagement by Acceptable Cargo Type -->
+    <select id="selectShipManagementByAcceptableCargoType" parameterType="String" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE acceptableCargoType = #{acceptableCargoType}
+    </select>
+
+    <!-- Select ShipManagement by Owner -->
+    <select id="selectShipManagementByOwner" parameterType="String" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE owner = #{owner}
+    </select>
+
+    <!-- Select ShipManagement by Operator -->
+    <select id="selectShipManagementByOperator" parameterType="String" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE operator = #{operator}
+    </select>
+
+    <!-- Select ShipManagement by Navigation Area -->
+    <select id="selectShipManagementByNavigationArea" parameterType="String" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE navigationArea = #{navigationArea}
+    </select>
+
+    <!-- Select ShipManagement by Ship Department -->
+    <select id="selectShipManagementByShipDepartment" parameterType="String" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE shipDepartment = #{shipDepartment}
+    </select>
+
+    <!-- Select ShipManagement by Ship Empty Port -->
+    <select id="selectShipManagementByShipEmptyPort" parameterType="String" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE shipEmptyPort = #{shipEmptyPort}
+    </select>
+
+    <!-- Select ShipManagement by Ship Empty Time -->
+    <select id="selectShipManagementByShipEmptyTime" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE shipEmptyTime = #{shipEmptyTime}
+    </select>
+
+    <!-- Select ShipManagement by Uploader ID -->
+    <select id="selectShipManagementByUploaderId" parameterType="Long" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE uploaderId = #{uploaderId}
+    </select>
+
+    <!-- Select ShipManagement by Created At -->
+    <select id="selectShipManagementByCreatedAt" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE createdAt = #{createdAt}
+    </select>
+
+    <!-- Select ShipManagement by Modified At -->
+    <select id="selectShipManagementByModifiedAt" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement WHERE modifiedAt = #{modifiedAt}
+    </select>
+
+    <!-- Delete ShipManagement by IMO -->
+    <delete id="deleteShipManagementByImo" parameterType="Long">
+        DELETE FROM ShipManagement WHERE imo = #{imo}
+    </delete>
+
+    <!-- Update ShipManagement -->
+    <update id="updateShipManagement" parameterType="us.dev.shipandcargo.domain.ShipManagement">
+        UPDATE ShipManagement
+        SET shipOperatingDay = #{shipOperatingDay},
+        shipTotalTime = #{shipTotalTime},
+        dailyCapitalCost = #{dailyCapitalCost},
+        dailyOperatingCost = #{dailyOperatingCost},
+        acceptableCargoType = #{acceptableCargoType},
+        owner = #{owner},
+        operator = #{operator},
+        navigationArea = #{navigationArea},
+        shipDepartment = #{shipDepartment},
+        shipEmptyPort = #{shipEmptyPort},
+        shipEmptyTime = #{shipEmptyTime},
+        uploaderId = #{uploaderId}
+        WHERE imo = #{imo}
+    </update>
+
+    <!-- Query ShipManagement by Condition -->
+    <select id="queryByCondition" parameterType="map" resultType="us.dev.shipandcargo.domain.ShipManagement">
+        SELECT * FROM ShipManagement
+        WHERE 1=1
+        <if test="imo != null">AND imo = #{imo}</if>
+        <if test="shipOperatingDay != null">AND shipOperatingDay = #{shipOperatingDay}</if>
+        <if test="shipTotalTime != null">AND shipTotalTime = #{shipTotalTime}</if>
+        <if test="dailyCapitalCost != null">AND dailyCapitalCost = #{dailyCapitalCost}</if>
+        <if test="dailyOperatingCost != null">AND dailyOperatingCost = #{dailyOperatingCost}</if>
+        <if test="acceptableCargoType != null">AND acceptableCargoType = #{acceptableCargoType}</if>
+        <if test="owner != null">AND owner = #{owner}</if>
+        <if test="operator != null">AND operator = #{operator}</if>
+        <if test="navigationArea != null">AND navigationArea = #{navigationArea}</if>
+        <if test="shipDepartment != null">AND shipDepartment = #{shipDepartment}</if>
+        <if test="shipEmptyPort != null">AND shipEmptyPort = #{shipEmptyPort}</if>
+        <if test="shipEmptyTime != null">AND shipEmptyTime = #{shipEmptyTime}</if>
+        <if test="uploaderId != null">AND uploaderId = #{uploaderId}</if>
+    </select>
+
+</mapper>
+
+

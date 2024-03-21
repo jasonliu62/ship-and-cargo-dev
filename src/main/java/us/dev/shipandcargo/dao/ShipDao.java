@@ -42,9 +42,9 @@ public interface ShipDao {
 
     List<Ship> selectShipByUploaderId(@Param("uploaderId") Long uploaderId);
 
-    List<Ship> selectCargoByCreatedAt(@Param("createdAt") Date createdAt);
+    List<Ship> selectShipByCreatedAt(@Param("createdAt") Date createdAt);
 
-    List<Ship> selectCargoByModifiedAt(@Param("modifiedAt") Date modifiedAt);
+    List<Ship> selectShipByModifiedAt(@Param("modifiedAt") Date modifiedAt);
 
     int deleteShipByImo(@Param("imo") Long imo);
 

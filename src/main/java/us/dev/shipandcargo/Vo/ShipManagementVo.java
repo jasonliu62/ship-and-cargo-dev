@@ -1,4 +1,4 @@
-package us.dev.shipandcargo.domain;
+package us.dev.shipandcargo.Vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
@@ -6,12 +6,9 @@ import lombok.Setter;
 
 import java.util.Date;
 
-
 @Getter
 @Setter
-public class ShipManagement {
-
-    // 船舶经营信息
+public class ShipManagementVo {
 
     private Long imo;
     private Float shipOperatingDay;
@@ -27,8 +24,7 @@ public class ShipManagement {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shipEmptyTime;
     private Long uploaderId;
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date modifiedAt;
+
 }
