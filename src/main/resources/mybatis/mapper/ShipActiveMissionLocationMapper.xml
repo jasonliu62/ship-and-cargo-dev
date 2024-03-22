@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.ShipActiveMissionLocationDao">
+
+    <!-- Insert a new ShipActiveMissionLocation -->
+    <insert id="insertShipActiveMissionLocation" parameterType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        INSERT INTO ShipActiveMissionLocation
+        (imo, latitude, longitude, postPortId, nextPortId, speed, departureDistance, arrivalDistance, currentTime, uploaderId, createdAt, modifiedAt)
+        VALUES
+        (#{imo}, #{latitude}, #{longitude}, #{postPortId}, #{nextPortId}, #{speed}, #{departureDistance}, #{arrivalDistance}, #{currentTime}, #{uploaderId}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <!-- Select ShipActiveMissionLocation by IMO -->
+    <select id="selectShipActiveMissionLocationByImo" parameterType="long" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE imo = #{imo}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by Latitude -->
+    <select id="selectShipActiveMissionLocationByLatitude" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE latitude = #{latitude}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by Longitude -->
+    <select id="selectShipActiveMissionLocationByLongitude" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE longitude = #{longitude}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by PostPortId -->
+    <select id="selectShipActiveMissionLocationByPostPortId" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE postPortId = #{postPortId}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by NextPortId -->
+    <select id="selectShipActiveMissionLocationByNextPortId" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE nextPortId = #{nextPortId}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by Speed -->
+    <select id="selectShipActiveMissionLocationBySpeed" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE speed = #{speed}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by DepartureDistance -->
+    <select id="selectShipActiveMissionLocationByDepartureDistance" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE departureDistance = #{departureDistance}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by ArrivalDistance -->
+    <select id="selectShipActiveMissionLocationByArrivalDistance" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE arrivalDistance = #{arrivalDistance}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by CurrentTime -->
+    <select id="selectShipActiveMissionLocationByCurrentTime" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE currentTime = #{currentTime}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by UploaderId -->
+    <select id="selectShipActiveMissionLocationByUploaderId" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE uploaderId = #{uploaderId}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by CreatedAt -->
+    <select id="selectShipActiveMissionLocationByCreatedAt" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE createdAt = #{createdAt}
+    </select>
+
+    <!-- Select ShipActiveMissionLocation by ModifiedAt -->
+    <select id="selectShipActiveMissionLocationByModifiedAt" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation WHERE modifiedAt = #{modifiedAt}
+    </select>
+
+    <!-- Update a ShipActiveMissionLocation -->
+    <update id="updateShipActiveMissionLocation" parameterType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        UPDATE ShipActiveMissionLocation
+        SET latitude = #{latitude},
+        longitude = #{longitude},
+        postPortId = #{postPortId},
+        nextPortId = #{nextPortId},
+        speed = #{speed},
+        departureDistance = #{departureDistance},
+        arrivalDistance = #{arrivalDistance},
+        currentTime = #{currentTime},
+        uploaderId = #{uploaderId},
+        createdAt = #{createdAt},
+        modifiedAt = #{modifiedAt}
+        WHERE imo = #{imo}
+    </update>
+
+    <!-- Delete a ShipActiveMissionLocation by IMO -->
+    <delete id="deleteShipActiveMissionLocationByImo" parameterType="long">
+        DELETE FROM ShipActiveMissionLocation WHERE imo = #{imo}
+    </delete>
+
+    <!-- Query ShipActiveMissionLocations by various conditions -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.ShipActiveMissionLocation">
+        SELECT * FROM ShipActiveMissionLocation
+        <where>
+            <if test="imo != null">
+                AND imo = #{imo}
+            </if>
+            <if test="latitude != null">
+                AND latitude = #{latitude}
+            </if>
+            <if test="longitude != null">
+                AND longitude = #{longitude}
+            </if>
+            <if test="postPortId != null">
+                AND postPortId = #{postPortId}
+            </if>
+            <if test="nextPortId != null">
+                AND nextPortId = #{nextPortId}
+            </if>
+            <if test="speed != null">
+                AND speed = #{speed}
+            </if>
+            <if test="departureDistance != null">
+                AND departureDistance = #{departureDistance}
+            </if>
+            <if test="arrivalDistance != null">
+                AND arrivalDistance = #{arrivalDistance}
+            </if>
+            <if test="currentTime != null">
+                AND currentTime = #{currentTime}
+            </if>
+            <if test="uploaderId != null">
+                AND (uploaderId = #{uploaderId} OR uploaderId = 0)
+            </if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
+    </select>
+</mapper>
