@@ -16,7 +16,7 @@ public class ShipIdelLocationVo {
 
     private Long imo;
     private String portId;
-    private int uploaderId;
+    private Long uploaderId;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;

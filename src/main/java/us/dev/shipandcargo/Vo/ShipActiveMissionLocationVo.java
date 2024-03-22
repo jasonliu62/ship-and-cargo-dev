@@ -30,13 +30,8 @@ public class ShipActiveMissionLocationVo {
     // 距下一港口距离
     private Float arrivalDistance;
     // 船的实时时间
-    private Long currentTime;
-    private int uploaderId;
-
-
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date createdAt;
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date modifiedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date currentTime;
+    private Long uploaderId;
 
 }

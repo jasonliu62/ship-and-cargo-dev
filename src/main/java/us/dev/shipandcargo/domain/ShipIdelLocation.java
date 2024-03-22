@@ -13,7 +13,7 @@ public class ShipIdelLocation {
     // 此处是无任务的船只
     private Long imo;
     private String portId;
-    private int uploaderId;
+    private Long uploaderId;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;

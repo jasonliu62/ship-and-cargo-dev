@@ -61,6 +61,7 @@ public class ShipManagementInsertReqBody {
     private String shipEmptyPort;
 
     @ApiModelProperty(example = "2023-01-15 10:00:00", value = "Ship empty time")
+    @NotEmpty(message = "Please provide ShipEmptyTime")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shipEmptyTime;
 

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import us.dev.shipandcargo.Vo.CargoVo;
 import us.dev.shipandcargo.dao.CargoDao;
 import us.dev.shipandcargo.domain.Cargo;
+import us.dev.shipandcargo.enums.ApiMessage;
+import us.dev.shipandcargo.exception.ApiException;
 import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
@@ -22,6 +24,10 @@ public class CargoService {
     private CargoDao cargoDao;
 
     public int insertCargo(Cargo cargo) {
+        Long id = cargo.getCargoId();
+        if (selectCargoById(id) != null) {
+            throw new ApiException(ApiMessage.CARGO_EXISTED);
+        }
         return cargoDao.insertCargo(cargo);
     }
 
