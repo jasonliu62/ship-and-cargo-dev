@@ -7,6 +7,8 @@ import us.dev.shipandcargo.Vo.ShipManagementVo;
 import us.dev.shipandcargo.dao.ShipManagementDao;
 import us.dev.shipandcargo.domain.ShipContractManagement;
 import us.dev.shipandcargo.domain.ShipManagement;
+import us.dev.shipandcargo.enums.ApiMessage;
+import us.dev.shipandcargo.exception.ApiException;
 import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
@@ -23,6 +25,10 @@ public class ShipManagementService {
     private ShipManagementDao shipManagementDao;
 
     public int insertShipManagement(ShipManagement shipManagement) {
+        Long imo = shipManagement.getImo();
+        if (selectShipManagementByImo(imo) != null) {
+            throw new ApiException(ApiMessage.SHIP_MANAGEMENT_EXISTED);
+        }
         return shipManagementDao.insertShipManagement(shipManagement);
     }
 

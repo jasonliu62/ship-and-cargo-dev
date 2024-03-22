@@ -7,6 +7,8 @@ import us.dev.shipandcargo.Vo.CargoVo;
 import us.dev.shipandcargo.Vo.ShipVo;
 import us.dev.shipandcargo.dao.ShipDao;
 import us.dev.shipandcargo.domain.Ship;
+import us.dev.shipandcargo.enums.ApiMessage;
+import us.dev.shipandcargo.exception.ApiException;
 import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
@@ -21,7 +23,13 @@ public class ShipService {
     @Autowired
     private ShipDao shipDao;
 
-    public int insertShip(Ship ship){ return shipDao.insertShip(ship);}
+    public int insertShip(Ship ship){
+        Long imo = ship.getImo();
+        if (selectShipByImo(imo) != null) {
+            throw new ApiException(ApiMessage.SHIP_EXISTED);
+        }
+        return shipDao.insertShip(ship);
+    }
 
     public Ship selectShipByImo(Long imo) { return shipDao.selectShipByImo(imo); }
 
