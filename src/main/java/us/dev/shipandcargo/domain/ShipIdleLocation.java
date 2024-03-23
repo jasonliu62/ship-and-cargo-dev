@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ShipIdelLocation {
+public class ShipIdleLocation {
 
     // 此处是无任务的船只
     private Long imo;

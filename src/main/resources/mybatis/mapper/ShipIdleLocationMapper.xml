@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.ShipIdleLocationDao">
+
+    <!-- Insert a new ShipIdleLocation -->
+    <insert id="insertShipIdleLocation" parameterType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        INSERT INTO ShipIdleLocation
+        (imo, portId, uploaderId, createdAt, modifiedAt)
+        VALUES
+        (#{imo}, #{portId}, #{uploaderId}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <!-- Select ShipIdleLocation by IMO -->
+    <select id="selectShipIdleLocationByImo" parameterType="long" resultType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        SELECT * FROM ShipIdleLocation WHERE imo = #{imo}
+    </select>
+
+    <!-- Select ShipIdleLocation by PortId -->
+    <select id="selectShipIdleLocationByPortId" resultType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        SELECT * FROM ShipIdleLocation WHERE portId = #{portId}
+    </select>
+
+    <!-- Select ShipIdleLocation by UploaderId -->
+    <select id="selectShipIdleLocationByUploaderId" resultType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        SELECT * FROM ShipIdleLocation WHERE uploaderId = #{uploaderId}
+    </select>
+
+    <!-- Select ShipIdleLocation by CreatedAt -->
+    <select id="selectShipIdleLocationByCreatedAt" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        SELECT * FROM ShipIdleLocation WHERE createdAt = #{createdAt}
+    </select>
+
+    <!-- Select ShipIdleLocation by ModifiedAt -->
+    <select id="selectShipIdleLocationByModifiedAt" parameterType="Date" resultType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        SELECT * FROM ShipIdleLocation WHERE modifiedAt = #{modifiedAt}
+    </select>
+
+    <!-- Delete a ShipIdleLocation by IMO -->
+    <delete id="deleteShipIdleLocationByImo" parameterType="long">
+        DELETE FROM ShipIdleLocation WHERE imo = #{imo}
+    </delete>
+
+    <!-- Update a ShipIdleLocation -->
+    <update id="updateShipIdleLocation" parameterType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        UPDATE ShipIdleLocation
+        SET portId = #{portId},
+        uploaderId = #{uploaderId},
+        createdAt = #{createdAt},
+        modifiedAt = #{modifiedAt}
+        WHERE imo = #{imo}
+    </update>
+
+    <!-- Query ShipIdleLocations by various conditions -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.ShipIdleLocation">
+        SELECT * FROM ShipIdleLocation
+        <where>
+            <if test="imo != null">
+                AND imo = #{imo}
+            </if>
+            <if test="portId != null">
+                AND portId = #{portId}
+            </if>
+            <if test="uploaderId != null">
+                AND uploaderId = #{uploaderId}
+            </if>
+            <if test="createdAt != null">
+                AND createdAt = #{createdAt}
+            </if>
+            <if test="modifiedAt != null">
+                AND modifiedAt = #{modifiedAt}
+            </if>
+        </where>
+    </select>
+</mapper>

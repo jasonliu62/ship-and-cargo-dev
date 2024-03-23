@@ -1,18 +1,15 @@
 package us.dev.shipandcargo.Vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Data
 @Getter
 @Setter
-@ApiModel(value = "ShipIdelLocationVo", description = "Basic info of the Ship without mission")
-public class ShipIdelLocationVo {
+@ApiModel(value = "ShipIdleLocationVo", description = "Basic info of the Ship without mission")
+public class ShipIdleLocationVo {
 
     private Long imo;
     private String portId;
