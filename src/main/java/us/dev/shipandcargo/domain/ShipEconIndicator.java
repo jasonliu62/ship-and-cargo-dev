@@ -8,24 +8,18 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ShipContractManagement {
-
-    // 货物合同编号
-    // 货物合同的利润
+public class ShipEconIndicator {
 
     private Long imo;
-    private Long contractId;
-    // 预估和实际利润
-    private Long estiProfit;
-    private Long realProfit;
-    // 合同进度
-    private Long contractProgress;
-    // 有几种？
-    private String contractStatus;
-
+    private Float oilConsumption;
+    private Float oilPrice;
+    private String chartType;
+    private Float charterTime;
+    private Float dailyRent;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date modifiedAt;
+
 }

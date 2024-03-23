@@ -9,6 +9,7 @@ import java.util.Date;
 // 船舶预空时间
 @Getter
 @Setter
+@Deprecated
 public class ShipSchedule {
 
     private Long imo;

@@ -63,12 +63,12 @@
             <if test="uploaderId != null">
                 AND uploaderId = #{uploaderId}
             </if>
-            <if test="createdAt != null">
-                AND createdAt = #{createdAt}
-            </if>
-            <if test="modifiedAt != null">
-                AND modifiedAt = #{modifiedAt}
-            </if>
         </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
     </select>
 </mapper>

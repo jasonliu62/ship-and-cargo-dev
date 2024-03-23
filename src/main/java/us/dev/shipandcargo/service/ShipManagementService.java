@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.dev.shipandcargo.Vo.ShipManagementVo;
 import us.dev.shipandcargo.dao.ShipManagementDao;
-import us.dev.shipandcargo.domain.ShipContractManagement;
 import us.dev.shipandcargo.domain.ShipManagement;
 import us.dev.shipandcargo.enums.ApiMessage;
 import us.dev.shipandcargo.exception.ApiException;
