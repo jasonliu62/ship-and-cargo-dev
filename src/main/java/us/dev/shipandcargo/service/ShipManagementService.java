@@ -14,6 +14,7 @@ import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
 import us.dev.shipandcargo.util.PageDataUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,7 +77,7 @@ public class ShipManagementService {
         return shipManagementDao.selectShipManagementByShipEmptyPort(shipEmptyPort);
     }
 
-    public List<ShipManagement> selectShipManagementByShipEmptyTime(Date shipEmptyTime) {
+    public List<ShipManagement> selectShipManagementByShipEmptyTime(LocalDateTime shipEmptyTime) {
         return shipManagementDao.selectShipManagementByShipEmptyTime(shipEmptyTime);
     }
 
@@ -100,7 +101,7 @@ public class ShipManagementService {
                                                          String navigationArea,
                                                          String shipDepartment,
                                                          String shipEmptyPort,
-                                                         Date shipEmptyTime,
+                                                         LocalDateTime shipEmptyTime,
                                                          Long uploaderId
     ) {
         PageHelper.startPage(paging.getCurrent(), paging.getPageSize());

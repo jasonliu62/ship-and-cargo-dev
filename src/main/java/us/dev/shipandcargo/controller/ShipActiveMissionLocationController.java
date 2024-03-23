@@ -16,10 +16,14 @@ import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.service.ShipActiveMissionLocationService;
 import us.dev.shipandcargo.service.UserService;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @RestController
 @Api(tags = {"Ship Active Mission Location Module"})
 @RequestMapping(value = "/ship-mission-location")
 public class ShipActiveMissionLocationController {
+
     @Autowired
     private ShipActiveMissionLocationService shipActiveMissionLocationService;
 
@@ -43,6 +47,7 @@ public class ShipActiveMissionLocationController {
         location.setSpeed(reqBody.getSpeed());
         location.setDepartureDistance(reqBody.getDepartureDistance());
         location.setArrivalDistance(reqBody.getArrivalDistance());
+        LocalDateTime tm = reqBody.getCurrentTime();
         location.setCurrentTime(reqBody.getCurrentTime());
         location.setUploaderId(uploaderId);
         return Result.success(shipActiveMissionLocationService.insertShipActiveMissionLocation(location));

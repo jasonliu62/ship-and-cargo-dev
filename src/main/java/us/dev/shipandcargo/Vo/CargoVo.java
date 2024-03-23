@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -22,9 +23,9 @@ public class CargoVo {
     private String loadPortId;
     private String unloadPortId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date layDay;
+    private LocalDateTime layDay;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date dischargeDay;
+    private LocalDateTime dischargeDay;
     private Float freightRate;
     private Float volumeRate;
     private Float loadportDepth;
@@ -33,6 +34,4 @@ public class CargoVo {
     private Float voyageVolume;
     private Float voyagePeriod;
     private int status;
-    private Date createdAt;
-    private Date modifiedAt;
 }

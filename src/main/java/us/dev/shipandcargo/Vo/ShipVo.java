@@ -30,7 +30,5 @@ public class ShipVo {
     private String owner;
     private String operator;
     private Long uploaderId;
-    private Date createdAt;
-    private Date modifiedAt;
 
 }

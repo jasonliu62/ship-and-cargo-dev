@@ -13,6 +13,7 @@ import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
 import us.dev.shipandcargo.util.PageDataUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,7 @@ public class ShipActiveMissionLocationService {
         return shipActiveMissionLocationDao.selectShipActiveMissionLocationByArrivalDistance(arrivalDistance);
     }
 
-    public List<ShipActiveMissionLocation> selectShipActiveMissionLocationByCurrentTime(Date currentTime) {
+    public List<ShipActiveMissionLocation> selectShipActiveMissionLocationByCurrentTime(LocalDateTime currentTime) {
         return shipActiveMissionLocationDao.selectShipActiveMissionLocationByCurrentTime(currentTime);
     }
 
@@ -83,7 +84,7 @@ public class ShipActiveMissionLocationService {
                                                                                 Float latitude, Float longitude,
                                                                                 String postPortId, String nextPortId,
                                                                                 Float speed, Float departureDistance,
-                                                                                Float arrivalDistance, Date currentTime,
+                                                                                Float arrivalDistance, LocalDateTime currentTime,
                                                                                 Long uploaderId) {
         PageHelper.startPage(paging.getCurrent(), paging.getPageSize());
         List<ShipActiveMissionLocation> locations = shipActiveMissionLocationDao.queryByCondition(imo, latitude, longitude,

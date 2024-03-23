@@ -6,6 +6,7 @@ import us.dev.shipandcargo.domain.Ship;
 import us.dev.shipandcargo.domain.ShipManagement;
 import us.dev.shipandcargo.request.paging.PaginationOrderQuery;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ListResourceBundle;
@@ -36,7 +37,7 @@ public interface ShipManagementDao {
 
     List<ShipManagement> selectShipManagementByShipEmptyPort(@Param("shipEmptyPort") String shipEmptyPort);
 
-    List<ShipManagement> selectShipManagementByShipEmptyTime(@Param("shipEmptyTime") Date shipEmptyTime);
+    List<ShipManagement> selectShipManagementByShipEmptyTime(@Param("shipEmptyTime") LocalDateTime shipEmptyTime);
 
     List<ShipManagement> selectShipManagementByUploaderId(@Param("uploaderId") Long uploaderId);
 
@@ -60,7 +61,7 @@ public interface ShipManagementDao {
             @Param("navigationArea") String navigationArea,
             @Param("shipDepartment") String shipDepartment,
             @Param("shipEmptyPort") String shipEmptyPort,
-            @Param("shipEmptyTime") Date shipEmptyTime,
+            @Param("shipEmptyTime") LocalDateTime shipEmptyTime,
             @Param("uploaderId") Long uploaderId,
             @Param("sortByList") List<PaginationOrderQuery> sortBy);
 

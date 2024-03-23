@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -63,6 +64,6 @@ public class ShipManagementInsertReqBody {
     @ApiModelProperty(example = "2023-01-15 10:00:00", value = "Ship empty time")
     @NotEmpty(message = "Please provide ShipEmptyTime")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date shipEmptyTime;
+    private LocalDateTime shipEmptyTime;
 
 }

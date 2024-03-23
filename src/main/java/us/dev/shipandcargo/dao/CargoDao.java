@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import us.dev.shipandcargo.domain.Cargo;
 import us.dev.shipandcargo.request.paging.PaginationOrderQuery;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +28,9 @@ public interface CargoDao {
 
     List<Cargo> selectCargoByUnloadPortId(@Param("unloadPortId") String unloadPortId);
 
-    List<Cargo> selectCargoByLayDay(@Param("layDay") Date layDay);
+    List<Cargo> selectCargoByLayDay(@Param("layDay") LocalDateTime layDay);
 
-    List<Cargo> selectCargoByDischargeDay(@Param("dischargeDay") Date dischargeDay);
+    List<Cargo> selectCargoByDischargeDay(@Param("dischargeDay") LocalDateTime dischargeDay);
 
     List<Cargo> selectCargoByFreightRate(@Param("freightRate") Float freightRate);
 
@@ -61,8 +62,8 @@ public interface CargoDao {
             @Param("cargoflowArea") String cargoflowArea,
             @Param("loadPortId") String loadPortId,
             @Param("unloadPortId") String unloadPortId,
-            @Param("layDay") Date layDay,
-            @Param("dischargeDay") Date dischargeDay,
+            @Param("layDay") LocalDateTime layDay,
+            @Param("dischargeDay") LocalDateTime dischargeDay,
             @Param("freightRate") Float freightRate,
             @Param("volumeRate") Float volumeRate,
             @Param("loadportDepth") Float loadportDepth,

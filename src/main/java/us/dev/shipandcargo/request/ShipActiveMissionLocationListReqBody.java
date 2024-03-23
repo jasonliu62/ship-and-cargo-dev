@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -53,6 +54,6 @@ public class ShipActiveMissionLocationListReqBody {
 
     @ApiModelProperty(example = "2023-01-15 10:00:00", value = "current time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date currentTime;
+    private LocalDateTime currentTime;
 
 }

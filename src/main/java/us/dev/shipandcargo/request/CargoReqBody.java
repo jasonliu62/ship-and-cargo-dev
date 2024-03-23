@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -52,11 +53,11 @@ public class CargoReqBody {
 
     @ApiModelProperty(example = "2023-10-10 20:20:20", value = "装货日期")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date layDay;
+    private LocalDateTime layDay;
 
     @ApiModelProperty(example = "2023-10-10 20:20:20", value = "卸货日期")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date dischargeDay;
+    private LocalDateTime dischargeDay;
 
     @ApiModelProperty(example = "0.5", value = "运费率")
     private Float freightRate;

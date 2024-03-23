@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import us.dev.shipandcargo.domain.ShipActiveMissionLocation;
 import us.dev.shipandcargo.request.paging.PaginationOrderQuery;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface ShipActiveMissionLocationDao {
 
     List<ShipActiveMissionLocation> selectShipActiveMissionLocationByArrivalDistance(@Param("arrivalDistance") Float arrivalDistance);
 
-    List<ShipActiveMissionLocation> selectShipActiveMissionLocationByCurrentTime(@Param("currentTime") Date currentTime);
+    List<ShipActiveMissionLocation> selectShipActiveMissionLocationByCurrentTime(@Param("currentTime") LocalDateTime currentTime);
 
     List<ShipActiveMissionLocation> selectShipActiveMissionLocationByUploaderId(@Param("uploaderId") Long uploaderId);
 
@@ -50,7 +51,7 @@ public interface ShipActiveMissionLocationDao {
             @Param("speed") Float speed,
             @Param("departureDistance") Float departureDistance,
             @Param("arrivalDistance") Float arrivalDistance,
-            @Param("currentTime") Date currentTime,
+            @Param("currentTime") LocalDateTime currentTime,
             @Param("uploaderId") Long uploaderId,
             @Param("sortByList") List<PaginationOrderQuery> sortBy);
 }

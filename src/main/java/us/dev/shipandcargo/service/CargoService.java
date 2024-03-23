@@ -13,6 +13,7 @@ import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
 import us.dev.shipandcargo.util.PageDataUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +65,7 @@ public class CargoService {
         return cargoDao.selectCargoByUnloadPortId(unloadPortId);
     }
 
-    public List<Cargo> selectCargoByLayDay(Date layDay) {
+    public List<Cargo> selectCargoByLayDay(LocalDateTime layDay) {
         return cargoDao.selectCargoByLayDay(layDay);
     }
 
@@ -72,7 +73,7 @@ public class CargoService {
         return cargoDao.selectCargoByStatus(status);
     }
 
-    public List<Cargo> selectCargoByDischargeDay(Date dischargeDay) {
+    public List<Cargo> selectCargoByDischargeDay(LocalDateTime dischargeDay) {
         return cargoDao.selectCargoByDischargeDay(dischargeDay);
     }
 
@@ -121,8 +122,8 @@ public class CargoService {
                                        String cargoflowArea,
                                        String loadPortId,
                                        String unloadPortId,
-                                       Date layDay,
-                                       Date dischargeDay,
+                                       LocalDateTime layDay,
+                                       LocalDateTime dischargeDay,
                                        Float freightRate,
                                        Float volumeRate,
                                        Float loadportDepth,

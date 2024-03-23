@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -18,6 +19,7 @@ public class ShipManagement {
     private Float shipTotalTime;
     private Float dailyCapitalCost;
     private Float dailyOperatingCost;
+    // 会存多种
     private String acceptableCargoType;
     private String owner;
     private String operator;
@@ -25,10 +27,11 @@ public class ShipManagement {
     private String shipDepartment;
     private String shipEmptyPort;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date shipEmptyTime;
+    private LocalDateTime shipEmptyTime;
     private Long uploaderId;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date modifiedAt;
+
 }

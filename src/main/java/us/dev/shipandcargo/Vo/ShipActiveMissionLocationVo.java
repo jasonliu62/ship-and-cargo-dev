@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -31,7 +32,7 @@ public class ShipActiveMissionLocationVo {
     private Float arrivalDistance;
     // 船的实时时间
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date currentTime;
+    private LocalDateTime currentTime;
     private Long uploaderId;
 
 }
