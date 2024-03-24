@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @Api(tags = {"Ship Module"})
 @RequestMapping(value = "/ship")
+@CrossOrigin // 儿第 记得加这个！
 public class ShipController {
 
     @Autowired
