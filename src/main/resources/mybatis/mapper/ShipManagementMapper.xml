@@ -123,7 +123,7 @@
             <if test="shipTotalTime != null">AND shipTotalTime = #{shipTotalTime}</if>
             <if test="dailyCapitalCost != null">AND dailyCapitalCost = #{dailyCapitalCost}</if>
             <if test="dailyOperatingCost != null">AND dailyOperatingCost = #{dailyOperatingCost}</if>
-            <if test="acceptableCargoType != null">AND acceptableCargoType = #{acceptableCargoType}</if>
+            <if test="acceptableCargoType != null">AND FIND_IN_SET(#{acceptableCargoType}, acceptableCargoType)</if>
             <if test="owner != null">AND owner = #{owner}</if>
             <if test="operator != null">AND operator = #{operator}</if>
             <if test="navigationArea != null">AND navigationArea = #{navigationArea}</if>

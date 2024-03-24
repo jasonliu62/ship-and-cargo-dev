@@ -47,7 +47,7 @@ public class ShipActiveMissionLocationController {
         location.setSpeed(reqBody.getSpeed());
         location.setDepartureDistance(reqBody.getDepartureDistance());
         location.setArrivalDistance(reqBody.getArrivalDistance());
-        LocalDateTime tm = reqBody.getCurrentTime();
+        // LocalDateTime tm = reqBody.getCurrentTime();
         location.setCurrentTime(reqBody.getCurrentTime());
         location.setUploaderId(uploaderId);
         return Result.success(shipActiveMissionLocationService.insertShipActiveMissionLocation(location));

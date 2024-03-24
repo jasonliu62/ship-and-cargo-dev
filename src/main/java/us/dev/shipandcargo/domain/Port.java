@@ -14,11 +14,11 @@ public class Port {
     private String nameCHN;
     private String nameENG;
     // 经度
-    private Long latitude;
+    private Float latitude;
     // 纬度
-    private Long longitude;
+    private Float longitude;
     // 港口最小水深
-    private Long minDraft;
+    private Float minDraft;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;

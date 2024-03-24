@@ -10,19 +10,21 @@ import java.util.Date;
 @Setter
 public class ContractManagement {
 
-    // 货物合同编号
-    // 货物合同的利润
-
+    // 模拟运算的id，不写成自增：
     private Long id;
+
     private Long contractNumber;
     // 预估和实际利润
-    private Long contractType;
-    private Long predictingBenefit;
-    private Long actualBenefit;
-    // 合同进度
-    private Long contractProgress;
-    // 有几种？
+    private String contractType;
+    private Long cargoId;
+    private Float predictingBenefit;
+    private Float actualBenefit;
+    // 合同进度 (完成 or 未完成)
+    private String contractProgress;
     private String contractState;
+    // private 0: 实际，1: 虚拟，2: 即期
+    private int status;
+    private Long uploaderId;
 
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)

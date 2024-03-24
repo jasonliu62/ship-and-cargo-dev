@@ -12,16 +12,20 @@ import java.util.Date;
 public class PortOther {
 
     private Long portId;
-    private Long avgTimeStay;
+    // 第一个航段的里程, 海里
+    private Float Distance;
+    private Float oilPrice;
+    private Float avgTimeStay;
+    private Float loadTime;
     // 装船效率
-    private Long loadEfficiency;
+    private Float loadEfficiency;
+    private Float unloadTime;
     // 卸船效率
-    private Long unloadEfficiency;
+    private Float unloadEfficiency;
     // 港口费
-    private Long portFee;
+    private Float portFee;
     // 平均锚泊时间
-    private Long avgAchorTime;
-
+    private Float avgAnchorTime;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date createdAt;
