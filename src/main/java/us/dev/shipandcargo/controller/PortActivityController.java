@@ -2,6 +2,7 @@ package us.dev.shipandcargo.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import us.dev.shipandcargo.Vo.PortActivityVo;
@@ -16,7 +17,7 @@ import us.dev.shipandcargo.util.ResultUtil;
 
 @RestController
 @Api(tags = {"Port Activity Module"})
-@RequestMapping(value = "/portActivity")
+@RequestMapping(value = "/port-activity")
 @CrossOrigin
 public class PortActivityController {
 
@@ -39,6 +40,14 @@ public class PortActivityController {
                 portActivityReqBody.getPagination(), portActivityReqBody.getPortId(),
                 portActivityReqBody.getShipAmount()
         ));
+    }
+
+    @ApiOperation(value = "Delete port activity")
+    @DeleteMapping("/delete")
+    public Result<?> deletePortActivity(
+            @ApiParam(value = "portId", required = true) Long portId) {
+        int result = portActivityService.deletePortActivityByPortId(portId);
+        return Result.success(result);
     }
 
 }

@@ -2,6 +2,7 @@ package us.dev.shipandcargo.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import us.dev.shipandcargo.Vo.PortVo;
@@ -47,6 +48,14 @@ public class PortController {
         ));
 
 
+    }
+
+    @ApiOperation(value = "Delete port activity")
+    @DeleteMapping("/delete")
+    public Result<?> deletePortActivity(
+            @ApiParam(value = "portId", required = true) Long portId) {
+        int result = portService.deletePortByPortId(portId);
+        return Result.success(result);
     }
 
 }

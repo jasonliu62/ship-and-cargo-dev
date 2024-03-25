@@ -5,7 +5,7 @@
     <!-- Insert a new port -->
     <insert id="insertPort" parameterType="us.dev.shipandcargo.domain.Port">
         INSERT INTO Port (portId, nameCHN, nameENG, latitude, longitude, minDraft)
-        VALUES (#{port.portId}, #{port.nameCHN}, #{port.nameENG}, #{port.latitude}, #{port.longitude}, #{port.minDraft})
+        VALUES (#{portId}, #{nameCHN}, #{nameENG}, #{latitude}, #{longitude}, #{minDraft})
     </insert>
 
     <!-- Select port by ID -->

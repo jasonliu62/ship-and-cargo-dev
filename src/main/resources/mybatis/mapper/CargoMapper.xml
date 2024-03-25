@@ -127,8 +127,7 @@
         voyageNumber = #{voyageNumber},
         voyageVolume = #{voyageVolume},
         voyagePeriod = #{voyagePeriod},
-        status = #{status.ordinal()},
-        modifiedAt = NOW()  <!-- Assuming your SQL dialect supports NOW() for the current timestamp -->
+        status = #{status.ordinal()}
         WHERE cargoId = #{cargoId}
     </update>
 

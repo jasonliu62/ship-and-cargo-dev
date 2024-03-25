@@ -5,7 +5,7 @@
     <!-- Insert a new port activity -->
     <insert id="insertPortActivity" parameterType="us.dev.shipandcargo.domain.PortActivity">
         INSERT INTO PortActivity (portId, shipAmount)
-        VALUES (#{portActivity.portId}, #{portActivity.shipAmount})
+        VALUES (#{portId}, #{shipAmount})
     </insert>
 
     <!-- Select port activity by port ID -->

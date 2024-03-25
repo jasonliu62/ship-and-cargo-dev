@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.PortOtherDao">
+
+    <!-- Insert operation -->
+    <insert id="insertPortOther" parameterType="us.dev.shipandcargo.domain.PortOther">
+        INSERT INTO PortOther
+        (portId, Distance, oilPrice, avgTimeStay, loadTime, loadEfficiency,
+        unloadTime, unloadEfficiency, portFee, avgAnchorTime, createdAt, modifiedAt)
+        VALUES
+        (#{portId}, #{distance}, #{oilPrice}, #{avgTimeStay}, #{loadTime}, #{loadEfficiency},
+        #{unloadTime}, #{unloadEfficiency}, #{portFee}, #{avgAnchorTime}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <!-- Select by ID -->
+    <select id="selectPortOtherById" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE portId = #{portId}
+    </select>
+
+    <!-- Update operation -->
+    <update id="updatePortOther" parameterType="us.dev.shipandcargo.domain.PortOther">
+        UPDATE PortOther
+        SET
+        Distance = #{distance},
+        oilPrice = #{oilPrice},
+        avgTimeStay = #{avgTimeStay},
+        loadTime = #{loadTime},
+        loadEfficiency = #{loadEfficiency},
+        unloadTime = #{unloadTime},
+        unloadEfficiency = #{unloadEfficiency},
+        portFee = #{portFee},
+        avgAnchorTime = #{avgAnchorTime}
+        WHERE portId = #{portId}
+    </update>
+
+    <!-- Delete operation -->
+    <delete id="deletePortOtherById">
+        DELETE FROM PortOther WHERE portId = #{portId}
+    </delete>
+
+    <!-- Select by various attributes -->
+    <select id="selectPortOtherByDistance" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE Distance = #{distance}
+    </select>
+
+    <select id="selectPortOtherByOilPrice" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE oilPrice = #{oilPrice}
+    </select>
+
+    <select id="selectPortOtherByAvgTimeStay" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE avgTimeStay = #{avgTimeStay}
+    </select>
+
+    <select id="selectPortOtherByLoadTime" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE loadTime = #{loadTime}
+    </select>
+
+    <select id="selectPortOtherByLoadEfficiency" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE loadEfficiency = #{loadEfficiency}
+    </select>
+
+    <select id="selectPortOtherByUnloadTime" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE unloadTime = #{unloadTime}
+    </select>
+
+    <select id="selectPortOtherByUnloadEfficiency" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE unloadEfficiency = #{unloadEfficiency}
+    </select>
+
+    <select id="selectPortOtherByPortFee" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE portFee = #{portFee}
+    </select>
+
+    <select id="selectPortOtherByAvgAnchorTime" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther WHERE avgAnchorTime = #{avgAnchorTime}
+    </select>
+
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.PortOther">
+        SELECT * FROM PortOther
+        <where>
+            <if test="portId != null">AND portId = #{portId}</if>
+            <if test="distance != null">AND Distance = #{distance}</if>
+            <if test="oilPrice != null">AND oilPrice = #{oilPrice}</if>
+            <if test="avgTimeStay != null">AND avgTimeStay = #{avgTimeStay}</if>
+            <if test="loadTime != null">AND loadTime = #{loadTime}</if>
+            <if test="loadEfficiency != null">AND loadEfficiency = #{loadEfficiency}</if>
+            <if test="unloadTime != null">AND unloadTime = #{unloadTime}</if>
+            <if test="unloadEfficiency != null">AND unloadEfficiency = #{unloadEfficiency}</if>
+            <if test="portFee != null">AND portFee = #{portFee}</if>
+            <if test="avgAnchorTime != null">AND avgAnchorTime = #{avgAnchorTime}</if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>
