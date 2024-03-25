@@ -85,7 +85,7 @@ public class ShipController {
 
     // delete 我还没测
     @ApiOperation(value = "delete ship")
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result<?> deleteShip(@ApiParam(value = "imo", required = true) Long imo) {
         return Result.success(shipService.deleteShipByImo(imo));
     }

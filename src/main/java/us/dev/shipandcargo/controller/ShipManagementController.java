@@ -22,7 +22,7 @@ import us.dev.shipandcargo.service.UserService;
 @RestController
 @Api(tags = {"Ship Management Module"})
 @RequestMapping(value = "/ship-management")
-@CrossOrigin // 儿第 记得加这个!
+@CrossOrigin // 儿第 记得加这个
 public class ShipManagementController {
 
     @Autowired
@@ -82,7 +82,7 @@ public class ShipManagementController {
     }
 
     @ApiOperation(value = "delete ship management")
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result<?> deleteShipManagement(@ApiParam(value = "imo", required = true) Long imo) {
         return Result.success(shipManagementService.deleteShipManagementByImo(imo));
     }

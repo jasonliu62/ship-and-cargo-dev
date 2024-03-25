@@ -19,6 +19,7 @@ import us.dev.shipandcargo.service.UserService;
 @RestController
 @Api(tags = {"Ship Idle Location Module"})
 @RequestMapping(value = "/ship-idle-location")
+@CrossOrigin
 public class ShipIdleLocationController {
 
     @Autowired

@@ -22,6 +22,7 @@ import java.util.Date;
 @RestController
 @Api(tags = {"Ship Active Mission Location Module"})
 @RequestMapping(value = "/ship-mission-location")
+@CrossOrigin
 public class ShipActiveMissionLocationController {
 
     @Autowired
