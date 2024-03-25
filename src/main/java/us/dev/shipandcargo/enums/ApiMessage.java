@@ -10,7 +10,11 @@ public enum ApiMessage {
     LOGIN_ERROR(6000, "Email or Password Incorrect."),
     SHIP_EXISTED(7000, "Ship already existed"),
     SHIP_MANAGEMENT_EXISTED(7001, "Ship Management already existed"),
-    SHIP_MISSION_LOCATION_EXISTED(7002, "Ship with mission's location already existed");
+    SHIP_MISSION_LOCATION_EXISTED(7002, "Ship with mission's location already existed"),
+    SHIP_IDLE_LOCATION_EXISTED(7003, "Ship idle location already existed"),
+    PORT_EXISTED(8000, "Port already existed"),
+    PORT_ACTIVITY_EXISTED(8001, "Port activity already existed");
+
 
     private int code;
     private String msg;

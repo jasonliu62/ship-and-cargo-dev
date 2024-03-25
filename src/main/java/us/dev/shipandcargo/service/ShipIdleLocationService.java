@@ -25,7 +25,7 @@ public class ShipIdleLocationService {
     public int insertShipIdleLocation(ShipIdleLocation location) {
         Long imo = location.getImo();
         if (selectShipIdleLocationByImo(imo) != null) {
-            throw new ApiException(ApiMessage.SHIP_MISSION_LOCATION_EXISTED);
+            throw new ApiException(ApiMessage.SHIP_IDLE_LOCATION_EXISTED);
         }
         return shipIdleLocationDao.insertShipIdleLocation(location);
     }

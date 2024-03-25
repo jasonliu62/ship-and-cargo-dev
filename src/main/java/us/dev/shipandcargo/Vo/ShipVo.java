@@ -1,12 +1,15 @@
 package us.dev.shipandcargo.Vo;
 
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-
+@Data
 @Getter
 @Setter
+@ApiModel(value = "ShipVo", description = "Basic info of the ship")
 public class ShipVo {
 
     private Long imo;

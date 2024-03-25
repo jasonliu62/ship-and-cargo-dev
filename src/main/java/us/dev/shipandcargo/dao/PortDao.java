@@ -3,18 +3,28 @@ package us.dev.shipandcargo.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import us.dev.shipandcargo.domain.Port;
+import us.dev.shipandcargo.request.paging.PaginationOrderQuery;
+
+import java.util.List;
 
 @Repository
 public interface PortDao {
     int insertPort(Port port);
-    Port selectPortById(@Param("portId") Long portId);
-    Port selectPortByCName(@Param("nameCHN") String nameCHN);
-    Port selectPortByEName(@Param("nameENG") String nameENG);
-    String selectCNameById(@Param("portId") Long portId);
-    String selectENameById(@Param("portId") Long portId);
-    Port selectPortByLatitude(@Param("latitude") Long latitude);
-    Port selectPortByLongitude(@Param("longitude") Long longitude);
-    Port selectPortByMinDraft(@Param("minDraft") Long minDraft);
+    Port selectPortByPortId(@Param("portId") Long portId);
+    List<Port> selectPortByCName(@Param("nameCHN") String nameCHN);
+    List<Port> selectPortByEName(@Param("nameENG") String nameENG);
+    List<Port> selectPortByLatitude(@Param("latitude") Float latitude);
+    List<Port> selectPortByLongitude(@Param("longitude") Float longitude);
+    List<Port> selectPortByMinDraft(@Param("minDraft") Float minDraft);
     int updatePort(Port port);
-    int deletePortById(@Param("portId") Long portId);
+    int deletePortByPortId(@Param("portId") Long portId);
+
+    List<Port> queryByCondition(
+            @Param("portId") Long portId,
+            @Param("nameCHN") String nameCHN,
+            @Param("nameENG") String nameENG,
+            @Param("latitude") Float latitude,
+            @Param("longitude") Float longitude,
+            @Param("minDraft") Float minDraft,
+            @Param("sortByList") List<PaginationOrderQuery> sortBy);
 }

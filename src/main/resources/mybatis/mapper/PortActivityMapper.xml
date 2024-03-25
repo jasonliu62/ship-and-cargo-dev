@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.PortActivityDao">
+
+    <!-- Insert a new port activity -->
+    <insert id="insertPortActivity" parameterType="us.dev.shipandcargo.domain.PortActivity">
+        INSERT INTO PortActivity (portId, shipAmount)
+        VALUES (#{portActivity.portId}, #{portActivity.shipAmount})
+    </insert>
+
+    <!-- Select port activity by port ID -->
+    <select id="selectPortActivityByPortId" parameterType="long" resultType="us.dev.shipandcargo.domain.PortActivity">
+        SELECT * FROM PortActivity WHERE portId = #{portId}
+    </select>
+
+    <!-- Select port activity by ship amount -->
+    <select id="selectPortActivityByShipAmount" parameterType="long" resultType="us.dev.shipandcargo.domain.PortActivity">
+        SELECT * FROM PortActivity WHERE shipAmount = #{shipAmount}
+    </select>
+
+    <!-- Update port activity -->
+    <update id="updatePortActivity" parameterType="us.dev.shipandcargo.domain.PortActivity">
+        UPDATE PortActivity
+        SET shipAmount = #{shipAmount}
+        WHERE portId = #{portId}
+    </update>
+
+    <!-- Delete port activity by port ID -->
+    <delete id="deletePortActivityByPortId" parameterType="long">
+        DELETE FROM PortActivity WHERE portId = #{portId}
+    </delete>
+
+    <!-- Query port activities by various conditions -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.PortActivity">
+        SELECT * FROM PortActivity
+        <where>
+            <if test="portId != null">
+                AND portId = #{portId}
+            </if>
+            <if test="shipAmount != null">
+                AND shipAmount = #{shipAmount}
+            </if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${item.sortName} ${item.sortOrder}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

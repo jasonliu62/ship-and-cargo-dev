@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.PortDao">
+
+    <!-- Insert a new port -->
+    <insert id="insertPort" parameterType="us.dev.shipandcargo.domain.Port">
+        INSERT INTO Port (portId, nameCHN, nameENG, latitude, longitude, minDraft)
+        VALUES (#{port.portId}, #{port.nameCHN}, #{port.nameENG}, #{port.latitude}, #{port.longitude}, #{port.minDraft})
+    </insert>
+
+    <!-- Select port by ID -->
+    <select id="selectPortByPortId" parameterType="long" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port WHERE portId = #{portId}
+    </select>
+
+    <!-- Select port by Chinese name -->
+    <select id="selectPortByCName" parameterType="string" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port WHERE nameCHN = #{nameCHN}
+    </select>
+
+    <!-- Select port by English name -->
+    <select id="selectPortByEName" parameterType="string" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port WHERE nameENG = #{nameENG}
+    </select>
+
+    <!-- Select port by latitude -->
+    <select id="selectPortByLatitude" parameterType="long" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port WHERE latitude = #{latitude}
+    </select>
+
+    <!-- Select port by longitude -->
+    <select id="selectPortByLongitude" parameterType="long" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port WHERE longitude = #{longitude}
+    </select>
+
+    <!-- Select port by minimum draft -->
+    <select id="selectPortByMinDraft" parameterType="long" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port WHERE minDraft = #{minDraft}
+    </select>
+
+    <!-- Update a port -->
+    <update id="updatePort" parameterType="us.dev.shipandcargo.domain.Port">
+        UPDATE Port
+        SET nameCHN = #{nameCHN}, nameENG = #{nameENG}, latitude = #{latitude},
+        longitude = #{longitude}, minDraft = #{minDraft}
+        WHERE portId = #{portId}
+    </update>
+
+    <!-- Delete a port by ID -->
+    <delete id="deletePortByPortId" parameterType="long">
+        DELETE FROM Port WHERE portId = #{portId}
+    </delete>
+
+    <!-- Query ports by various conditions -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.Port">
+        SELECT * FROM Port
+        <where>
+            <if test="portId != null">
+                AND portId = #{portId}
+            </if>
+            <if test="nameCHN != null">
+                AND nameCHN = #{nameCHN}
+            </if>
+            <if test="nameENG != null">
+                AND nameENG = #{nameENG}
+            </if>
+            <if test="latitude != null">
+                AND latitude = #{latitude}
+            </if>
+            <if test="longitude != null">
+                AND longitude = #{longitude}
+            </if>
+            <if test="minDraft != null">
+                AND minDraft = #{minDraft}
+            </if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${item.sortName} ${item.sortOrder}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>
