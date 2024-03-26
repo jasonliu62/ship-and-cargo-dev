@@ -34,7 +34,6 @@ public class Cargo {
     private Float unloadportDepth;
     private Long voyageNumber;
     private Float voyageVolume;
-
     private Float voyagePeriod;
 
     // private String company;

@@ -26,7 +26,7 @@ public class PortOtherService {
         Long id = portOther.getPortId();
         if (selectPortOtherById(id) != null) {
             // 这边要改成port
-            throw new ApiException(ApiMessage.SHIP_EXISTED);
+            throw new ApiException(ApiMessage.PORT_OTHER_EXISTED);
         }
         return portOtherDao.insertPortOther(portOther);
     }

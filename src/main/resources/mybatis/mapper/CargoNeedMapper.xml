@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.CargoNeedDao">
+
+    <!-- 插入货物需求记录 -->
+    <insert id="insertCargoNeed" parameterType="us.dev.shipandcargo.domain.CargoNeed">
+        INSERT INTO CargoNeed (contractNumber, cargoId, loadCost, unloadCost, Other, loadTime, unloadTime, anchorTime, irregularstoppingTime, navigationTime, voyageTime, status)
+        VALUES (#{contractNumber}, #{cargoId}, #{loadCost}, #{unloadCost}, #{other}, #{loadTime}, #{unloadTime}, #{anchorTime}, #{irregularstoppingTime}, #{navigationTime}, #{voyageTime}, #{status})
+    </insert>
+
+    <!-- 根据ID选择货物需求 -->
+    <select id="selectCargoNeedById" parameterType="long" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT * FROM CargoNeed WHERE contractNumber = #{id}
+    </select>
+
+    <!-- 根据合同编号选择货物需求 -->
+    <select id="selectCargoNeedByContractNumber" parameterType="long" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT * FROM CargoNeed WHERE contractNumber = #{contractNumber}
+    </select>
+
+    <!-- 根据货物ID选择货物需求 -->
+    <select id="selectCargoNeedByCargoId" parameterType="long" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT * FROM CargoNeed WHERE cargoId = #{cargoId}
+    </select>
+
+    <!-- 更新货物需求 -->
+    <update id="updateCargoNeed" parameterType="us.dev.shipandcargo.domain.CargoNeed">
+        UPDATE CargoNeed
+        SET
+        contractNumber = #{contractNumber},
+        loadCost = #{loadCost},
+        unloadCost = #{unloadCost},
+        other = #{other},
+        loadTime = #{loadTime},
+        unloadTime = #{unloadTime},
+        anchorTime = #{anchorTime},
+        irregularStoppingTime = #{irregularStoppingTime},
+        navigationTime = #{navigationTime},
+        voyageTime = #{voyageTime},
+        status = #{status}
+        WHERE cargoId = #{cargoId} AND uploaderId = #{uploaderId}
+    </update>
+
+
+    <!-- 根据ID删除货物需求 -->
+    <delete id="deleteCargoNeedByIdAndUploaderId">
+        DELETE FROM CargoNeed WHERE cargoId = #{cargoId} AND uploaderId = #{uploaderId}
+    </delete>
+
+    <!-- 根据合同编号删除货物需求 -->
+    <delete id="deleteCargoNeedByContractNumber" parameterType="long">
+        DELETE FROM CargoNeed WHERE contractNumber = #{contractNumber}
+    </delete>
+
+    <!-- 根据状态选择所有符合的货物需求 -->
+    <select id="selectCargoNeedsByStatus" parameterType="int" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT * FROM CargoNeed WHERE status = #{status}
+    </select>
+
+    <!-- 选择所有货物需求 -->
+    <select id="selectAllCargoNeeds" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT * FROM CargoNeed
+    </select>
+
+    <!-- 根据layday从早到晚sort出来 -->
+    <select id="selectAllCargoNeedsByUploaderSortedByLayDay" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT cn.*
+        FROM CargoNeed cn
+        JOIN Cargo c ON cn.contractNumber = c.contractNumber AND cn.cargoId = c.cargoId
+        WHERE cn.uploaderId = #{uploaderId}
+        ORDER BY c.layDay ASC
+    </select>
+
+    <!-- 清空表 -->
+    <delete id="deleteCargoNeedByUploaderId">
+        DELETE FROM CargoNeed WHERE uploaderId = #{uploaderId}
+    </delete>
+
+    <!-- 根据合同编号和货物ID删除货物需求 -->
+    <delete id="deleteCargoNeedByContractNumberAndCargoId">
+        DELETE FROM CargoNeed WHERE contractNumber = #{contractNumber} AND cargoId = #{cargoId}
+    </delete>
+
+
+</mapper>

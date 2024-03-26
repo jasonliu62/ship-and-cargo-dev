@@ -9,6 +9,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class Voyage {
+    // 先不做
+
+
     // 这边是单船只的航道，还是统称的航道
     private Long imo;
     // 航次代码
