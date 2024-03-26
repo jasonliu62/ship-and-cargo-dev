@@ -57,7 +57,7 @@ public class PortOtherController {
     }
 
     @ApiOperation(value = "delete port other")
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result<?> deletePortOther(@ApiParam(value = "portId", required = true) Long portId) {
         return Result.success(portOtherService.deletePortOtherById(portId));
     }
