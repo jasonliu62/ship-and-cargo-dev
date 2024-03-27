@@ -4,8 +4,8 @@
 
     <!-- 插入货物需求记录 -->
     <insert id="insertCargoNeed" parameterType="us.dev.shipandcargo.domain.CargoNeed">
-        INSERT INTO CargoNeed (contractNumber, cargoId, loadCost, unloadCost, Other, loadTime, unloadTime, anchorTime, irregularstoppingTime, navigationTime, voyageTime, status)
-        VALUES (#{contractNumber}, #{cargoId}, #{loadCost}, #{unloadCost}, #{other}, #{loadTime}, #{unloadTime}, #{anchorTime}, #{irregularstoppingTime}, #{navigationTime}, #{voyageTime}, #{status})
+        INSERT INTO CargoNeed (contractNumber, cargoId, loadCost, unloadCost, Other, loadTime, unloadTime, anchorTime, irregularstoppingTime, navigationTime, voyageTime, status, uploaderId)
+        VALUES (#{contractNumber}, #{cargoId}, #{loadCost}, #{unloadCost}, #{other}, #{loadTime}, #{unloadTime}, #{anchorTime}, #{irregularstoppingTime}, #{navigationTime}, #{voyageTime}, #{status}, #{uploaderId})
     </insert>
 
     <!-- 根据ID选择货物需求 -->
@@ -23,6 +23,11 @@
         SELECT * FROM CargoNeed WHERE cargoId = #{cargoId}
     </select>
 
+    <!-- 根据货物ID和上传人ID选择货物需求 -->
+    <select id="selectCargoNeedByCargoIdAndUploader" resultType="us.dev.shipandcargo.domain.CargoNeed">
+        SELECT * FROM CargoNeed WHERE cargoId = #{cargoId} and uploaderId = #{uploaderId}
+    </select>
+
     <!-- 更新货物需求 -->
     <update id="updateCargoNeed" parameterType="us.dev.shipandcargo.domain.CargoNeed">
         UPDATE CargoNeed
@@ -34,7 +39,7 @@
         loadTime = #{loadTime},
         unloadTime = #{unloadTime},
         anchorTime = #{anchorTime},
-        irregularStoppingTime = #{irregularStoppingTime},
+        irregularstoppingTime = #{irregularstoppingTime},
         navigationTime = #{navigationTime},
         voyageTime = #{voyageTime},
         status = #{status}
@@ -43,7 +48,7 @@
 
 
     <!-- 根据ID删除货物需求 -->
-    <delete id="deleteCargoNeedByIdAndUploaderId">
+    <delete id="deleteCargoNeedByIdAndUploader">
         DELETE FROM CargoNeed WHERE cargoId = #{cargoId} AND uploaderId = #{uploaderId}
     </delete>
 
@@ -80,6 +85,17 @@
     <delete id="deleteCargoNeedByContractNumberAndCargoId">
         DELETE FROM CargoNeed WHERE contractNumber = #{contractNumber} AND cargoId = #{cargoId}
     </delete>
+
+    <select id="selectCargosByUploaderId" resultType="us.dev.shipandcargo.domain.Cargo">
+        SELECT *
+        FROM Cargo
+        WHERE cargoId IN (
+        SELECT cargoId
+        FROM CargoNeed
+        WHERE uploaderId = #{uploaderId}
+        )
+    </select>
+
 
 
 </mapper>

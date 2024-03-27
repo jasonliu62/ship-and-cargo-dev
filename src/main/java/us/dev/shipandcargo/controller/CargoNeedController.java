@@ -18,6 +18,8 @@ import us.dev.shipandcargo.service.CargoNeedService;
 import us.dev.shipandcargo.service.CargoService;
 import us.dev.shipandcargo.service.UserService;
 
+import java.util.List;
+
 @RestController
 @Api(tags = {"Cargo Need Module"})
 @RequestMapping(value = "/cargo-need")
@@ -54,6 +56,15 @@ public class CargoNeedController {
         return Result.success(cargoNeedService.insertListHandler(uploaderId, status, unloadPort, loadPort, cargoId, contractNumber));
     }
 
+    @ApiOperation(value = "sort-list")
+    @PostMapping("/sort-list")
+    public Result<?> insertListCargo(@Valid HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7);
+        Long uploaderId = userService.findUserByToken(token).getId();
+        List<Cargo> cargos = cargoNeedService.selectCargosByUploaderId(uploaderId);
+        return Result.success(cargoNeedService.listCargoNeedsHandler(cargos));
+    }
+
     @ApiOperation(value = "update cargo Need")
     @PostMapping("/update")
     public Result<?> insertListCargo(@ApiParam(value = "cargoId", required = true) Long cargoId,
@@ -67,7 +78,8 @@ public class CargoNeedController {
         cargoNeed.setOther(reqBody.getOther());
         cargoNeed.setLoadTime(reqBody.getLoadTime());
         cargoNeed.setUnloadTime(reqBody.getUnloadTime());
-        cargoNeed.setIrregularstoppingTime(reqBody.getIrregularStoppingTime());
+        cargoNeed.setAnchorTime(reqBody.getAnchorTime());
+        cargoNeed.setIrregularstoppingTime(reqBody.getIrregularstoppingTime());
         cargoNeed.setNavigationTime(reqBody.getNavigationTime());
         cargoNeed.setVoyageTime(reqBody.getVoyageTime());
         return Result.success(cargoNeedService.updateCargoNeed(cargoNeed));
@@ -81,7 +93,6 @@ public class CargoNeedController {
         Long uploaderId = userService.findUserByToken(token).getId();
         return Result.success(cargoNeedService.listCargoNeedHandler(cargoId, uploaderId));
     }
-
 
     @ApiOperation(value = "delete cargo Need")
     @DeleteMapping("/delete-single")

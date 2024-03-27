@@ -2,6 +2,7 @@ package us.dev.shipandcargo.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import us.dev.shipandcargo.domain.Cargo;
 import us.dev.shipandcargo.domain.CargoNeed;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface CargoNeedDao {
 
     int updateCargoNeed(CargoNeed record);
 
-    int deleteCargoNeedByIdAndUploader(@Param("id") Long id, @Param("uploaderId") Long uploaderId);
+    int deleteCargoNeedByIdAndUploader(@Param("cargoId") Long cargoId, @Param("uploaderId") Long uploaderId);
 
     int deleteCargoNeedByContractNumber(@Param("contractNumber") Long contractNumber);
 
@@ -32,6 +33,9 @@ public interface CargoNeedDao {
     int deleteCargoNeedByUploaderId(@Param("uploaderId") Long uploaderId);
 
     int deleteCargoNeedByContractNumberAndCargoId(@Param("contractNumber") Long contractNumber, @Param("cargoId") Long cargoId);
+
+    List<Cargo> selectCargosByUploaderId(@Param("uploaderId") Long uploaderId);
+
 
 }
 
