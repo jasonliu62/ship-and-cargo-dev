@@ -58,7 +58,7 @@ public class CargoNeedController {
 
     @ApiOperation(value = "sort-list")
     @PostMapping("/sort-list")
-    public Result<?> insertListCargo(@Valid HttpServletRequest request) {
+    public Result<?> sortListCargo(@Valid HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
         Long uploaderId = userService.findUserByToken(token).getId();
         List<Cargo> cargos = cargoNeedService.selectCargosByUploaderId(uploaderId);
@@ -67,7 +67,7 @@ public class CargoNeedController {
 
     @ApiOperation(value = "update cargo Need")
     @PostMapping("/update")
-    public Result<?> insertListCargo(@ApiParam(value = "cargoId", required = true) Long cargoId,
+    public Result<?> updateCargoNeed(@ApiParam(value = "cargoId", required = true) Long cargoId,
                                      @Valid HttpServletRequest request,
                                      @RequestBody CargoNeedUpdateReqBody reqBody) {
         String token = request.getHeader("Authorization").substring(7);
@@ -109,7 +109,5 @@ public class CargoNeedController {
         Long uploaderId = userService.findUserByToken(token).getId();
         return Result.success(cargoNeedService.deleteCargoNeedByUploaderId(uploaderId));
     }
-
-
 
 }

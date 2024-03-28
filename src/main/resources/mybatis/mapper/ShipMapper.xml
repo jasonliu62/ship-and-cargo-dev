@@ -13,6 +13,11 @@
         SELECT * FROM Ship WHERE imo = #{imo}
     </select>
 
+    <!-- Select a ship by IMO and UploaderId -->
+    <select id="selectShipByImoAndUploaderId" resultType="us.dev.shipandcargo.domain.Ship">
+        SELECT * FROM Ship WHERE imo = #{imo} AND (uploaderId = #{uploaderId} OR uploaderId = 0)
+    </select>
+
     <!-- Select ships by dead weight -->
     <select id="selectShipByDeadWeight" resultType="us.dev.shipandcargo.domain.Ship">
         SELECT * FROM Ship WHERE deadWeight = #{deadWeight}

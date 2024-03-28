@@ -14,6 +14,7 @@ public enum ApiMessage {
     SHIP_MANAGEMENT_EXISTED(7001, "Ship Management already existed"),
     SHIP_MISSION_LOCATION_EXISTED(7002, "Ship with mission's location already existed"),
     SHIP_IDLE_LOCATION_EXISTED(7003, "Ship idle location already existed"),
+    SHIP_NOT_EXISTED(7004, "Ship does not exist."),
     PORT_EXISTED(8000, "Port already existed"),
     PORT_ACTIVITY_EXISTED(8001, "Port activity already existed"),
     PORT_OTHER_EXISTED(8002, "Port other already existed");

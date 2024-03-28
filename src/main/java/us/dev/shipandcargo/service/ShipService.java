@@ -33,6 +33,10 @@ public class ShipService {
 
     public Ship selectShipByImo(Long imo) { return shipDao.selectShipByImo(imo); }
 
+    public Ship selectShipByImoAndUploaderId(Long imo, Long uploaderId) {
+        return shipDao.selectShipByImoAndUploaderId(imo, uploaderId);
+    }
+
     public List<Ship> selectShipByDeadWeight(Float deadWeight) {
         return shipDao.selectShipByDeadWeight(deadWeight);
     }

@@ -16,6 +16,8 @@ public interface ShipDao {
 
     Ship selectShipByImo(@Param("imo") Long imo);
 
+    Ship selectShipByImoAndUploaderId(@Param("imo") Long imo, @Param("uploaderId") Long uploaderId);
+
     List<Ship> selectShipByDeadWeight(@Param("deadWeight") Float deadWeight);
 
     List<Ship> selectShipByShipType(@Param("shipType") String shipType);

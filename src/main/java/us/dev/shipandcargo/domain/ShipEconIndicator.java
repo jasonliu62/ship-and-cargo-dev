@@ -16,10 +16,6 @@ public class ShipEconIndicator {
     private String chartType;
     private Float charterTime;
     private Float dailyRent;
-
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date createdAt;
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date modifiedAt;
+    private Long selectorId;
 
 }

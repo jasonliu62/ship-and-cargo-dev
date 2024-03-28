@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.ShipEconIndicatorDao">
+
+    <insert id="insertShipEconIndicator" parameterType="us.dev.shipandcargo.domain.ShipEconIndicator">
+        INSERT INTO ShipEconIndicator (imo, oilConsumption, oilPrice, chartType, charterTime, dailyRent, selectorId)
+        VALUES (#{imo}, #{oilConsumption}, #{oilPrice}, #{chartType}, #{charterTime}, #{dailyRent}, #{selectorId})
+    </insert>
+
+    <select id="selectShipEconIndicatorByImoAndSelector" resultType="us.dev.shipandcargo.domain.ShipEconIndicator">
+        SELECT * FROM ShipEconIndicator WHERE imo = #{imo} AND selectorId = #{selectorId}
+    </select>
+
+    <select id="selectAllShipEconIndicatorsBySelector" resultType="us.dev.shipandcargo.domain.ShipEconIndicator">
+        SELECT * FROM ShipEconIndicator WHERE selectorId = #{selectorId}
+    </select>
+
+    <update id="updateShipEconIndicator" parameterType="us.dev.shipandcargo.domain.ShipEconIndicator">
+        UPDATE ShipEconIndicator
+        SET oilConsumption = #{oilConsumption},
+            oilPrice = #{oilPrice},
+            chartType = #{chartType},
+            charterTime = #{charterTime},
+            dailyRent = #{dailyRent}
+        WHERE imo = #{imo} AND selectorId = #{selectorId}
+    </update>
+
+    <delete id="deleteShipEconIndicatorByImoAndSelector">
+        DELETE FROM ShipEconIndicator WHERE imo = #{imo} AND selectorId = #{selectorId}
+    </delete>
+
+    <delete id="deleteAllBySelector">
+        DELETE FROM ShipEconIndicator WHERE selectorId = #{selectorId}
+    </delete>
+
+    <select id="selectShipsBySelectorId" resultType="us.dev.shipandcargo.domain.ShipEconIndicator">
+        SELECT *
+        FROM Ship
+        WHERE imo IN (
+        SELECT imo
+        FROM ShipEconIndicator
+        WHERE selectorId = #{selectorId}
+        )
+    </select>
+
+</mapper>
