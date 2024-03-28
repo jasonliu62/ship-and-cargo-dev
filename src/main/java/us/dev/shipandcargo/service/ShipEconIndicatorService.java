@@ -82,10 +82,10 @@ public class ShipEconIndicatorService {
         ShipEconIndicator shipEconIndicator = selectShipEconIndicatorByImoAndSelector(imo, uploaderId);
         ShipEconIndicatorVo shipEconIndicatorVo = new ShipEconIndicatorVo();
         shipEconIndicatorVo.setCharterTime(shipEconIndicator.getCharterTime());
-        shipEconIndicatorVo.setDailyRent(shipEconIndicatorVo.getDailyRent());
-        shipEconIndicatorVo.setChartType(shipEconIndicatorVo.getChartType());
-        shipEconIndicatorVo.setOilPrice(shipEconIndicatorVo.getOilPrice());
-        shipEconIndicatorVo.setOilConsumption(shipEconIndicatorVo.getOilConsumption());
+        shipEconIndicatorVo.setDailyRent(shipEconIndicator.getDailyRent());
+        shipEconIndicatorVo.setChartType(shipEconIndicator.getChartType());
+        shipEconIndicatorVo.setOilPrice(shipEconIndicator.getOilPrice());
+        shipEconIndicatorVo.setOilConsumption(shipEconIndicator.getOilConsumption());
         return shipEconIndicatorVo;
     }
 }

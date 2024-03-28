@@ -34,7 +34,7 @@
         DELETE FROM ShipEconIndicator WHERE selectorId = #{selectorId}
     </delete>
 
-    <select id="selectShipsBySelectorId" resultType="us.dev.shipandcargo.domain.ShipEconIndicator">
+    <select id="selectShipsBySelectorId" resultType="us.dev.shipandcargo.domain.Ship">
         SELECT *
         FROM Ship
         WHERE imo IN (

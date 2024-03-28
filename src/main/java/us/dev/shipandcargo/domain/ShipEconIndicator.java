@@ -17,5 +17,6 @@ public class ShipEconIndicator {
     private Float charterTime;
     private Float dailyRent;
     private Long selectorId;
+    // 要不要加入 是否租用
 
 }

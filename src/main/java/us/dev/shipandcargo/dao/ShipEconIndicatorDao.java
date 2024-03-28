@@ -20,7 +20,7 @@ public interface ShipEconIndicatorDao {
 
     int deleteShipEconIndicatorByImoAndSelector(@Param("imo") Long imo, @Param("selectorId") Long selectorId);
 
-    int deleteAllBySelector(@Param("imo") Long imo);
+    int deleteAllBySelector(@Param("selectorId") Long selectorId);
 
-    List<Ship> selectShipsBySelectorId(@Param("uploaderId") Long selectorId);
+    List<Ship> selectShipsBySelectorId(@Param("selectorId") Long selectorId);
 }
