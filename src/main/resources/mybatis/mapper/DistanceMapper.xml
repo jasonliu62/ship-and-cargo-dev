@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.DistanceDao">
+
+    <!-- Insert a new distance record -->
+    <insert id="insertDistance" parameterType="us.dev.shipandcargo.domain.Distance">
+        INSERT INTO Distance (startPortId, endPortId, distance)
+        VALUES (#{startPortId}, #{endPortId}, #{distance})
+    </insert>
+
+    <!-- Select a distance record by ID -->
+    <select id="selectDistanceById" parameterType="long" resultType="us.dev.shipandcargo.domain.Distance">
+        SELECT * FROM Distance WHERE id = #{id}
+    </select>
+
+    <!-- Select all distance records -->
+    <select id="selectAllDistances" resultType="us.dev.shipandcargo.domain.Distance">
+        SELECT * FROM Distance
+    </select>
+
+    <!-- Select a distance record by start and end port IDs -->
+    <select id="selectDistanceByStartAndEndPort" resultType="us.dev.shipandcargo.domain.Distance">
+        SELECT * FROM Distance
+        WHERE startPortId = #{startPortId} AND endPortId = #{endPortId}
+    </select>
+
+    <!-- Update a distance record -->
+    <update id="updateDistance" parameterType="us.dev.shipandcargo.domain.Distance">
+        UPDATE Distance
+        SET startPortId = #{startPortId}, endPortId = #{endPortId}, distance = #{distance}
+        WHERE id = #{id}
+    </update>
+
+    <!-- Delete a distance record by ID -->
+    <delete id="deleteDistanceById" parameterType="long">
+        DELETE FROM Distance WHERE id = #{id}
+    </delete>
+
+</mapper>

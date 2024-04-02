@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
+@Deprecated
 public class Voyage {
     // 先不做
 
