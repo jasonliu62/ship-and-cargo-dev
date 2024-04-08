@@ -8,8 +8,9 @@ import lombok.Setter;
 public class Distance {
 
     private Long id;
-    private Long startPortId;
-    private Long endPortId;
+    private String shipType;
+    private String startPortId;
+    private String endPortId;
     private Float distance;
 
 }

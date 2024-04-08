@@ -5,13 +5,13 @@
 
     <!-- Insert a new distance record -->
     <insert id="insertDistance" parameterType="us.dev.shipandcargo.domain.Distance">
-        INSERT INTO Distance (startPortId, endPortId, distance)
-        VALUES (#{startPortId}, #{endPortId}, #{distance})
+        INSERT INTO Distance (shipType, startPortId, endPortId, distance)
+        VALUES (#{shipType}, #{startPortId}, #{endPortId}, #{distance})
     </insert>
 
-    <!-- Select a distance record by ID -->
-    <select id="selectDistanceById" parameterType="long" resultType="us.dev.shipandcargo.domain.Distance">
-        SELECT * FROM Distance WHERE id = #{id}
+    <!-- Select distance records by shipType -->
+    <select id="selectDistanceByShipType" parameterType="java.lang.String" resultType="us.dev.shipandcargo.domain.Distance">
+        SELECT * FROM Distance WHERE shipType = #{shipType}
     </select>
 
     <!-- Select all distance records -->
@@ -28,7 +28,7 @@
     <!-- Update a distance record -->
     <update id="updateDistance" parameterType="us.dev.shipandcargo.domain.Distance">
         UPDATE Distance
-        SET startPortId = #{startPortId}, endPortId = #{endPortId}, distance = #{distance}
+        SET shipType = #{shipType}, startPortId = #{startPortId}, endPortId = #{endPortId}, distance = #{distance}
         WHERE id = #{id}
     </update>
 

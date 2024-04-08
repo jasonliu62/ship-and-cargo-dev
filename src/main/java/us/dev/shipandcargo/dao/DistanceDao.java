@@ -12,11 +12,11 @@ public interface DistanceDao {
 
     int insertDistance(Distance distance);
 
-    Distance selectDistanceById(@Param("id") Long id);
+    List<Distance> selectDistanceByShipType(@Param("shipType") String shipType);
 
     List<Distance> selectAllDistances();
 
-    Distance selectDistanceByStartAndEndPort(@Param("startPortId") Long startPortId, @Param("endPortId") Long endPortId);
+    List<Distance> selectDistanceByStartAndEndPort(@Param("startPortId") String startPortId, @Param("endPortId") String endPortId);
 
     int updateDistance(Distance distance);
 

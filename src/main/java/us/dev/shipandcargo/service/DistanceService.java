@@ -17,15 +17,15 @@ public class DistanceService {
         return distanceDao.insertDistance(distance);
     }
 
-    public Distance selectDistanceById(Long id) {
-        return distanceDao.selectDistanceById(id);
+    public List<Distance> selectDistanceByShipType(String shipType) {
+        return distanceDao.selectDistanceByShipType(shipType);
     }
 
     public List<Distance> selectAllDistances() {
         return distanceDao.selectAllDistances();
     }
 
-    public Distance selectDistanceByStartAndEndPort(Long startPortId, Long endPortId) {
+    public List<Distance> selectDistanceByStartAndEndPort(String startPortId, String endPortId) {
         return distanceDao.selectDistanceByStartAndEndPort(startPortId, endPortId);
     }
 
