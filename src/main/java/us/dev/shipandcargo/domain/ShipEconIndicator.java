@@ -18,5 +18,6 @@ public class ShipEconIndicator {
     private Float dailyRent;
     private Long selectorId;
     // 要不要加入 是否租用
+    private Float speed;
 
 }

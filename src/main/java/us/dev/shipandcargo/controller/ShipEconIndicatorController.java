@@ -70,6 +70,7 @@ public class ShipEconIndicatorController {
         shipEconIndicator.setCharterTime(reqBody.getCharterTime());
         shipEconIndicator.setDailyRent(reqBody.getDailyRent());
         shipEconIndicator.setOilPrice(reqBody.getOilPrice());
+        shipEconIndicator.setSpeed(reqBody.getSpeed());
         return Result.success(shipEconIndicatorService.updateShipEconIndicator(shipEconIndicator));
     }
 

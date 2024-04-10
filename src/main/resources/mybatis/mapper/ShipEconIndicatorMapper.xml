@@ -4,8 +4,8 @@
 <mapper namespace="us.dev.shipandcargo.dao.ShipEconIndicatorDao">
 
     <insert id="insertShipEconIndicator" parameterType="us.dev.shipandcargo.domain.ShipEconIndicator">
-        INSERT INTO ShipEconIndicator (imo, oilConsumption, oilPrice, chartType, charterTime, dailyRent, selectorId)
-        VALUES (#{imo}, #{oilConsumption}, #{oilPrice}, #{chartType}, #{charterTime}, #{dailyRent}, #{selectorId})
+        INSERT INTO ShipEconIndicator (imo, oilConsumption, oilPrice, chartType, charterTime, dailyRent, selectorId, speed)
+        VALUES (#{imo}, #{oilConsumption}, #{oilPrice}, #{chartType}, #{charterTime}, #{dailyRent}, #{selectorId}, #{speed})
     </insert>
 
     <select id="selectShipEconIndicatorByImoAndSelector" resultType="us.dev.shipandcargo.domain.ShipEconIndicator">

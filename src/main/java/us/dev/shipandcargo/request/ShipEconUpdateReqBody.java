@@ -34,4 +34,8 @@ public class ShipEconUpdateReqBody {
     @ApiModelProperty(example = "15000.0", value = "Daily rent price")
     private Float dailyRent;
 
+    @NotEmpty(message = "Speed cannot be null")
+    @ApiModelProperty(example = "25", value = "Speed")
+    private Float speed;
+
 }

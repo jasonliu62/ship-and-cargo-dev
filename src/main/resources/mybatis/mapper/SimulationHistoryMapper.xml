@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.SimulationHistoryDao">
+
+    <!-- Insert a new SimulationHistory -->
+    <insert id="insertSimulationHistory" parameterType="us.dev.shipandcargo.domain.SimulationHistory">
+        INSERT INTO SimulationHistory
+        (groupId, cargoIdCombo, imoCombo, startDay, endDay, uploaderId)
+        VALUES (#{groupId}, #{cargoIdCombo}, #{imoCombo}, #{startDay}, #{endDay}, #{uploaderId})
+    </insert>
+
+    <!-- Delete SimulationHistory by groupId and uploaderId -->
+    <delete id="deleteSimulationHistoryByGroupIdAndUploaderId">
+        DELETE FROM SimulationHistory
+        WHERE groupId = #{groupId} AND uploaderId = #{uploaderId}
+    </delete>
+
+    <select id="countSimulationHistory" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM SimulationHistory
+    </select>
+
+    <!-- Query by Condition -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.SimulationHistory">
+        SELECT * FROM SimulationHistory
+        <where>
+            <if test="groupId != null">
+                AND groupId = #{groupId}
+            </if>
+            <if test="uploaderId != null">
+                AND uploaderId = #{uploaderId}
+            </if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
+    </select>
+</mapper>
