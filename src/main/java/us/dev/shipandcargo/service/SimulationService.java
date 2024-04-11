@@ -26,7 +26,7 @@ public class SimulationService {
 
     public int insertSimulationHistory(List<Ship> shipList, List<Cargo> cargoList,
                                        LocalDateTime startDay, LocalDateTime endDay, Long uploaderId) {
-        Long groupId = simulationHistoryDao.countSimulationHistory() + 1;
+        Long groupId = getGroupId() + 1;
         SimulationHistory simulationHistory = new SimulationHistory();
         simulationHistory.setGroupId(groupId);
         simulationHistory.setUploaderId(uploaderId);
@@ -54,6 +54,11 @@ public class SimulationService {
         }
 
         return PageDataUtil.convertToPageData(simulationHistories, simulationHistoryVoList);
+    }
+
+
+    public Long getGroupId() {
+        return simulationHistoryDao.countSimulationHistory();
     }
 
     private String buildShipCombo(List<Ship> shipList) {

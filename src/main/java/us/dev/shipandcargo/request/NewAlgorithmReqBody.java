@@ -34,5 +34,4 @@ public class NewAlgorithmReqBody {
 
     @NotEmpty(message = "请填写")
     Long groupId;
-
 }
