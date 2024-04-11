@@ -8,15 +8,14 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import us.dev.shipandcargo.domain.Cargo;
-import us.dev.shipandcargo.domain.Result;
-import us.dev.shipandcargo.domain.Ship;
-import us.dev.shipandcargo.domain.SimulationHistory;
+import us.dev.shipandcargo.domain.*;
 import us.dev.shipandcargo.request.NewAlgorithmReqBody;
 import us.dev.shipandcargo.request.PaginationReqBody;
 import us.dev.shipandcargo.request.ShipInsertReqBody;
 import us.dev.shipandcargo.request.SimulationReqBody;
 import us.dev.shipandcargo.request.paging.PaginationProps;
+import us.dev.shipandcargo.service.OutputEachService;
+import us.dev.shipandcargo.service.OutputService;
 import us.dev.shipandcargo.service.SimulationService;
 import us.dev.shipandcargo.service.UserService;
 
@@ -37,6 +36,12 @@ public class SimulationController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private OutputService outputService;
+
+    @Autowired
+    private OutputEachService outputEachService;
 
     @ApiOperation(value = "insert SimulationHistory")
     @PostMapping("/insert")
@@ -93,5 +98,65 @@ public class SimulationController {
         return Result.success(simulationService.listSimulationHistory(reqBody.getPagination(), uploaderId));
     }
 
-    // 还要写list出来每次具体跑的东西。。
+    @ApiOperation(value = "list Output")
+    @PostMapping("/list-output")
+    public Result<?> listOutput(
+            @Valid
+            HttpServletRequest request,
+            @ApiParam Long groupId,
+            @RequestBody PaginationReqBody reqBody) {
+        String token = request.getHeader("Authorization").substring(7);
+        Long uploaderId = userService.findUserByToken(token).getId();
+        return Result.success(outputService.listOutput(reqBody.getPagination(), uploaderId, groupId));
+    }
+
+
+    // OutputId 就是上一个Output的id
+    // 点击详情加载出来OutputEach
+    @ApiOperation(value = "list OutputEach")
+    @PostMapping("/list-output-each")
+    public Result<?> listOutputEach(
+            @Valid
+            HttpServletRequest request,
+            @ApiParam Long groupId,
+            @ApiParam Long outputId,
+            @RequestBody PaginationReqBody reqBody) {
+        String token = request.getHeader("Authorization").substring(7);
+        Long uploaderId = userService.findUserByToken(token).getId();
+        return Result.success(outputEachService.listOutputEach(reqBody.getPagination(), uploaderId, outputId, groupId));
+    }
+
+    @ApiOperation(value = "delete 3 Outputs")
+    // 把OutputHistory, Output们, OutputEach们一起删了
+    @DeleteMapping("/delete-from-output-history")
+    public Result<?> delete3Outputs(
+            @Valid
+            HttpServletRequest request,
+            @ApiParam Long groupId,
+            @RequestBody PaginationReqBody reqBody) {
+        String token = request.getHeader("Authorization").substring(7);
+        Long uploaderId = userService.findUserByToken(token).getId();
+        int res0 = simulationService.deleteSimulationHistory(groupId, uploaderId);
+        outputService.deleteFromHistory(groupId, uploaderId);
+        outputEachService.deleteFromHistory(groupId, uploaderId);
+        return Result.success(res0);
+    }
+
+    @ApiOperation(value = "delete 2 Outputs")
+    // 把Output, OutputEach们一起删了
+    @DeleteMapping("/delete-from-output")
+    public Result<?> delete2Outputs(
+            @Valid
+            HttpServletRequest request,
+            @ApiParam Long groupId,
+            @ApiParam Long id,
+            @RequestBody PaginationReqBody reqBody) {
+        String token = request.getHeader("Authorization").substring(7);
+        Long uploaderId = userService.findUserByToken(token).getId();
+        int res = outputService.deleteOutputBy3Ids(groupId, id, uploaderId);
+        outputEachService.deleteOutputEachsBy3Ids(groupId, id, uploaderId);
+        return Result.success(res);
+    }
+
+
 }

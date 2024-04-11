@@ -13,8 +13,11 @@ public interface OutputEachDao {
     // 删除绑定在Output上的每一条OutputEach
     int deleteOutputEachsBy3Ids(@Param("groupId") Long groupId, @Param("outputId") Long outputId, @Param("uploaderId") Long uploaderId);
 
+    int deleteFromHistory(@Param("groupId") Long groupId, @Param("uploaderId") Long uploaderId);
+
     List<OutputEach> queryByCondition(
             @Param("groupId") Long groupId,
+            @Param("outputId") Long outputId,
             @Param("uploaderId") Long uploaderId,
             @Param("sortByList") List<PaginationOrderQuery> sortByList
     );

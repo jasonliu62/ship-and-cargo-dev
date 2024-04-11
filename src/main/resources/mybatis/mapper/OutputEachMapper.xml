@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.dev.shipandcargo.dao.OutputEachDao">
+
+    <!-- Insert a new OutputEach record -->
+    <insert id="insertOutput" parameterType="us.dev.shipandcargo.domain.OutputEach">
+        INSERT INTO OutputEach
+        (groupId, outputId, cargoId, cargoType, shipCombo, profit, uploaderId)
+        VALUES
+        (#{groupId}, #{outputId}, #{cargoId}, #{cargoType}, #{shipCombo}, #{profit}, #{uploaderId})
+    </insert>
+
+    <!-- Delete OutputEach records by groupId, outputId, and uploaderId -->
+    <delete id="deleteOutputEachsBy3Ids">
+        DELETE FROM OutputEach
+        WHERE groupId = #{groupId} AND outputId = #{outputId} AND uploaderId = #{uploaderId}
+    </delete>
+
+    <!-- Delete an Output record by groupId and uploaderId -->
+    <delete id="deleteFromHistory">
+        DELETE FROM OutputEach
+        WHERE groupId = #{groupId} AND uploaderId = #{uploaderId}
+    </delete>
+
+    <!-- Query by Condition -->
+    <select id="queryByCondition" resultType="us.dev.shipandcargo.domain.OutputEach">
+        SELECT * FROM OutputEach
+        <where>
+            <if test="groupId != null">
+                AND groupId = #{groupId}
+            </if>
+            <if test = "outputId != null">
+                AND outputId = #{outputId}
+            </if>
+            <if test="uploaderId != null">
+                AND uploaderId = #{uploaderId}
+            </if>
+        </where>
+        <if test="sortByList != null">
+            ORDER BY
+            <foreach collection="sortByList" item="item" index="index" separator=",">
+                ${sort.field} ${sort.order}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

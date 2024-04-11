@@ -86,4 +86,8 @@ public class SimulationService {
         }
         return sb.toString();
     }
+
+    public int deleteSimulationHistory(Long groupId, Long uploaderId) {
+        return simulationHistoryDao.deleteSimulationHistoryByGroupIdAndUploaderId(groupId, uploaderId);
+    }
 }
