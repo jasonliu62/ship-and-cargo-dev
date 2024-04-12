@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import us.dev.shipandcargo.Vo.ShipVo;
 import us.dev.shipandcargo.Vo.SimulationHistoryVo;
 import us.dev.shipandcargo.dao.SimulationHistoryDao;
-import us.dev.shipandcargo.domain.Cargo;
-import us.dev.shipandcargo.domain.Ship;
-import us.dev.shipandcargo.domain.SimulationHistory;
+import us.dev.shipandcargo.domain.*;
 import us.dev.shipandcargo.request.paging.PageData;
 import us.dev.shipandcargo.request.paging.PaginationProps;
 import us.dev.shipandcargo.util.ObjectUtil;
@@ -23,6 +21,15 @@ public class SimulationService {
 
     @Autowired
     private SimulationHistoryDao simulationHistoryDao;
+
+    @Autowired
+    private CargoService cargoService;
+
+    @Autowired
+    private ShipService shipService;
+
+    @Autowired
+    private ShipManagementService shipManagementService;
 
     public int insertSimulationHistory(List<Ship> shipList, List<Cargo> cargoList,
                                        LocalDateTime startDay, LocalDateTime endDay, Long uploaderId) {
@@ -89,5 +96,18 @@ public class SimulationService {
 
     public int deleteSimulationHistory(Long groupId, Long uploaderId) {
         return simulationHistoryDao.deleteSimulationHistoryByGroupIdAndUploaderId(groupId, uploaderId);
+    }
+
+    public void listBuildHandler(List<ShipEconIndicator> shipEconIndicatorList, List<Ship> shipList, List<ShipManagement> shipManagementList,
+                                 List<CargoNeed> cargoNeedList, List<Cargo> cargoList) {
+        for (ShipEconIndicator indicator: shipEconIndicatorList) {
+            Long imo = indicator.getImo();
+            shipList.add(shipService.selectShipByImo(imo));
+            shipManagementList.add(shipManagementService.selectShipManagementByImo(imo));
+        }
+        for (CargoNeed cargoNeed: cargoNeedList) {
+            Long cargoId = cargoNeed.getCargoId();
+            cargoList.add(cargoService.selectCargoById(cargoId));
+        }
     }
 }

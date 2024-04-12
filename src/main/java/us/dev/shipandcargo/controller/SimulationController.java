@@ -9,17 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import us.dev.shipandcargo.domain.*;
-import us.dev.shipandcargo.request.NewAlgorithmReqBody;
-import us.dev.shipandcargo.request.PaginationReqBody;
-import us.dev.shipandcargo.request.ShipInsertReqBody;
-import us.dev.shipandcargo.request.SimulationReqBody;
+import us.dev.shipandcargo.request.*;
 import us.dev.shipandcargo.request.paging.PaginationProps;
-import us.dev.shipandcargo.service.OutputEachService;
-import us.dev.shipandcargo.service.OutputService;
-import us.dev.shipandcargo.service.SimulationService;
-import us.dev.shipandcargo.service.UserService;
+import us.dev.shipandcargo.service.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -43,6 +38,13 @@ public class SimulationController {
     @Autowired
     private OutputEachService outputEachService;
 
+    @Autowired
+    private CargoNeedService cargoNeedService;
+
+    @Autowired
+    private ShipEconIndicatorService indicatorService;
+
+
     @ApiOperation(value = "insert SimulationHistory")
     @PostMapping("/insert")
     public Result<?> insertSimulationHistory(
@@ -58,8 +60,11 @@ public class SimulationController {
         return Result.success(simulationService.insertSimulationHistory(shipList, cargoList, startDay, endDay, uploaderId));
     }
 
+    // 这边要写个把simulation之前每个list都提取出来的api。。。
+
     @ApiOperation(value = "Simulation")
     @PostMapping("/simulation")
+    @Deprecated
     public Result<?> simulation(
             @Valid
             HttpServletRequest request,
@@ -81,6 +86,42 @@ public class SimulationController {
         newAlgorithmReqBody.setUploaderId(uploaderId);
 
         String url = "http://106.55.105.246:3030/algorithm/calculation";
+        Result<?> response = restTemplate.postForObject(url, newAlgorithmReqBody, Result.class);
+
+        return Result.success(response);
+    }
+
+    @ApiOperation(value = "Final Simulation")
+    @PostMapping("/final-simulation")
+    public Result<?> finalSimulation(
+            @Valid
+            HttpServletRequest request,
+            @RequestBody FinalSimulationReqBody reqBody) {
+        String token = request.getHeader("Authorization").substring(7);
+        Long uploaderId = userService.findUserByToken(token).getId();
+        List<CargoNeed> cargoNeedList = cargoNeedService.selectAllCargoNeedsByUploaderSortedByLayDay(uploaderId);
+        List<ShipEconIndicator> shipEconIndicatorList = indicatorService.selectAllShipEconIndicatorsBySelector(uploaderId);
+
+        List<Ship> shipList = new ArrayList<>();
+        List<ShipManagement> shipManagementList = new ArrayList<>();
+        List<Cargo> cargoList = new ArrayList<>();
+
+        simulationService.listBuildHandler(shipEconIndicatorList, shipList, shipManagementList, cargoNeedList, cargoList);
+
+        LocalDateTime startDay = reqBody.getStartDay();
+        LocalDateTime endDay = reqBody.getEndDay();
+        simulationService.insertSimulationHistory(shipList, cargoList, startDay, endDay, uploaderId);
+        NewAlgorithmReqBody newAlgorithmReqBody = new NewAlgorithmReqBody();
+        newAlgorithmReqBody.setCargoList(cargoList);
+        newAlgorithmReqBody.setGroupId(simulationService.getGroupId());
+        newAlgorithmReqBody.setShipList(shipList);
+        newAlgorithmReqBody.setIndicatorList(shipEconIndicatorList);
+        newAlgorithmReqBody.setShipManagementList(shipManagementList);
+        newAlgorithmReqBody.setCargoNeedList(cargoNeedList);
+        newAlgorithmReqBody.setUploaderId(uploaderId);
+
+        // String url = "http://106.55.105.246:3030/algorithm/calculation";
+        String url = "http://localhost:3030/algorithm/calculation";
         Result<?> response = restTemplate.postForObject(url, newAlgorithmReqBody, Result.class);
 
         return Result.success(response);
