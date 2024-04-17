@@ -120,8 +120,8 @@ public class SimulationController {
         newAlgorithmReqBody.setCargoNeedList(cargoNeedList);
         newAlgorithmReqBody.setUploaderId(uploaderId);
 
-        // String url = "http://106.55.105.246:3030/algorithm/calculation";
-        String url = "http://localhost:3030/algorithm/calculation";
+        String url = "http://106.55.105.246:3030/algorithm/calculation";
+        // String url = "http://localhost:3030/algorithm/calculation";
         Result<?> response = restTemplate.postForObject(url, newAlgorithmReqBody, Result.class);
 
         return Result.success(response);
@@ -148,7 +148,7 @@ public class SimulationController {
             @RequestBody PaginationReqBody reqBody) {
         String token = request.getHeader("Authorization").substring(7);
         Long uploaderId = userService.findUserByToken(token).getId();
-        return Result.success(outputService.listOutput(reqBody.getPagination(), uploaderId, groupId));
+        return Result.success(outputService.listOutput(reqBody.getPagination(), groupId, uploaderId));
     }
 
 
@@ -164,7 +164,7 @@ public class SimulationController {
             @RequestBody PaginationReqBody reqBody) {
         String token = request.getHeader("Authorization").substring(7);
         Long uploaderId = userService.findUserByToken(token).getId();
-        return Result.success(outputEachService.listOutputEach(reqBody.getPagination(), uploaderId, outputId, groupId));
+        return Result.success(outputEachService.listOutputEach(reqBody.getPagination(), groupId, outputId, uploaderId));
     }
 
     @ApiOperation(value = "delete 3 Outputs")

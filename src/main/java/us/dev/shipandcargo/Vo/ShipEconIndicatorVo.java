@@ -16,5 +16,6 @@ public class ShipEconIndicatorVo {
     private String chartType;
     private Float charterTime;
     private Float dailyRent;
+    private Float speed;
 
 }
