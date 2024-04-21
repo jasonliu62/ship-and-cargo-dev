@@ -21,7 +21,7 @@ public class Output {
     private Float spot_own;
     private Float spot_rent;
     private Float spot_all;
-    private Float all;
+    private Float total;
     private Long uploaderId;
 
     // 创建完output以后，记得把所有指数都set为0
@@ -37,7 +37,7 @@ public class Output {
         this.spot_own = 0F;
         this.spot_rent = 0F;
         this.spot_all = 0F;
-        this.all = 0F;
+        this.total = 0F;
     }
 
 }

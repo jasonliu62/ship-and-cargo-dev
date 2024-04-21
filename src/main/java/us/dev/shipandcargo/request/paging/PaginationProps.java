@@ -69,7 +69,7 @@ public class PaginationProps {
                 }
             }
 
-            field = StringUtil.humpToLine(field);
+            // field = StringUtil.humpToLine(field);
             parsedSortBy.add(new PaginationOrderQuery(field, sort));
 
         }

@@ -33,9 +33,11 @@ public class OutputService {
         return outputDao.deleteFromHistory(groupId, uploaderId);
     }
 
-    public PageData<OutputVo> listOutput(PaginationProps paging, Long groupId,
-                                         Long uploaderId) {
+    public PageData<OutputVo> listOutput(PaginationProps paging, Long groupId, Long uploaderId) {
+        // 启动分页插件
         PageHelper.startPage(paging.getCurrent(), paging.getPageSize());
+
+        // 查询数据
         List<Output> outputList = outputDao.queryByCondition(groupId, uploaderId, paging.getSortByToList());
         if (outputList.size() == 0) {
             return PageDataUtil.convertToPageData(new ArrayList<OutputVo>());

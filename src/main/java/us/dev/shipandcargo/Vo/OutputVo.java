@@ -24,5 +24,5 @@ public class OutputVo {
     private Float spot_own;
     private Float spot_rent;
     private Float spot_all;
-    private Float all;
+    private Float total;
 }
