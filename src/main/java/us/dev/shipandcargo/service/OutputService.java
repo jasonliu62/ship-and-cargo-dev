@@ -1,6 +1,7 @@
 package us.dev.shipandcargo.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,7 @@ public class OutputService {
 
         // 查询数据
         List<Output> outputList = outputDao.queryByCondition(groupId, uploaderId, paging.getSortByToList());
+        // PageInfo<Output> pageInfo = new PageInfo<Output>(outputList);
         if (outputList.size() == 0) {
             return PageDataUtil.convertToPageData(new ArrayList<OutputVo>());
         }
