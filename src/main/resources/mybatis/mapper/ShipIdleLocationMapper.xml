@@ -64,10 +64,11 @@
                 AND uploaderId = #{uploaderId}
             </if>
         </where>
-        <if test="sortByList != null">
-            ORDER BY
-            <foreach collection="sortByList" item="item" index="index" separator=",">
-                ${sort.field} ${sort.order}
+        <if test="sortByList!=null and !sortByList.isEmpty()">
+            order by
+            <foreach collection="sortByList" item="item" index="index"
+                     separator=",">
+                ${item.sortName} ${item.sortOrder}
             </foreach>
         </if>
     </select>
