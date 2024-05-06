@@ -24,10 +24,10 @@ public class PortActivityService {
     private PortActivityDao portActivityDao;
 
     public int insertPortActivity(PortActivity portActivity) {
-        String portId = portActivity.getPortId();
-        if (selectPortActivityByPortId(portId) != null) {
-            throw new ApiException(ApiMessage.PORT_ACTIVITY_EXISTED);
-        }
+//        String portId = portActivity.getPortId();
+//        if (selectPortActivityByPortId(portId) != null) {
+//            throw new ApiException(ApiMessage.PORT_ACTIVITY_EXISTED);
+//        }
         return portActivityDao.insertPortActivity(portActivity);
     }
 
@@ -47,7 +47,7 @@ public class PortActivityService {
         return portActivityDao.deletePortActivityByPortId(portId);
     }
 
-    public PageData<PortActivityVo> listPortActivity(PaginationProps paging, Long portId, Long shipAmount) {
+    public PageData<PortActivityVo> listPortActivity(PaginationProps paging, String portId, Long shipAmount) {
         PageHelper.startPage(paging.getCurrent(), paging.getPageSize());
         List<PortActivity> portActivities = portActivityDao.queryByCondition(portId, shipAmount, paging.getSortByToList());
         if (portActivities.size() == 0) {

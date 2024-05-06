@@ -23,10 +23,10 @@ public class PortService {
     private PortDao portDao;
 
     public int insertPort(Port port){
-        String portId = port.getPortId();
-        if (selectPortByPortId(portId) != null){
-            throw new ApiException(ApiMessage.PORT_EXISTED);
-        }
+//        String portId = port.getPortId();
+//        if (selectPortByPortId(portId) != null){
+//            throw new ApiException(ApiMessage.PORT_EXISTED);
+//        }
         return portDao.insertPort(port);
     }
 

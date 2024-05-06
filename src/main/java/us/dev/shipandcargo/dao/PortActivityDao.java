@@ -21,7 +21,7 @@ public interface PortActivityDao {
     int deletePortActivityByPortId(@Param("portId") Long portId);
 
     List<PortActivity> queryByCondition(
-            @Param("portId") Long portId,
+            @Param("portId") String portId,
             @Param("shipAmount") Long shipAmount,
             @Param("sortByList") List<PaginationOrderQuery> sortBy);
 }
