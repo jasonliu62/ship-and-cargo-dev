@@ -24,14 +24,14 @@ public class PortActivityService {
     private PortActivityDao portActivityDao;
 
     public int insertPortActivity(PortActivity portActivity) {
-        Long portId = portActivity.getPortId();
+        String portId = portActivity.getPortId();
         if (selectPortActivityByPortId(portId) != null) {
             throw new ApiException(ApiMessage.PORT_ACTIVITY_EXISTED);
         }
         return portActivityDao.insertPortActivity(portActivity);
     }
 
-    public PortActivity selectPortActivityByPortId(Long portId) {
+    public PortActivity selectPortActivityByPortId(String portId) {
         return portActivityDao.selectPortActivityByPortId(portId);
     }
 

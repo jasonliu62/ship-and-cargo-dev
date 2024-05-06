@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class PortActivity {
 
-    private Long portId;
+    private String portId;
     private Long shipAmount;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)

@@ -10,21 +10,21 @@ import java.util.List;
 @Repository
 public interface PortDao {
     int insertPort(Port port);
-    Port selectPortByPortId(@Param("portId") Long portId);
+    Port selectPortByPortId(@Param("portId") String portId);
     List<Port> selectPortByCName(@Param("nameCHN") String nameCHN);
     List<Port> selectPortByEName(@Param("nameENG") String nameENG);
-    List<Port> selectPortByLatitude(@Param("latitude") Float latitude);
-    List<Port> selectPortByLongitude(@Param("longitude") Float longitude);
+    List<Port> selectPortByLatitude(@Param("latitude") String latitude);
+    List<Port> selectPortByLongitude(@Param("longitude") String longitude);
     List<Port> selectPortByMinDraft(@Param("minDraft") Float minDraft);
     int updatePort(Port port);
     int deletePortByPortId(@Param("portId") Long portId);
 
     List<Port> queryByCondition(
-            @Param("portId") Long portId,
+            @Param("portId") String portId,
             @Param("nameCHN") String nameCHN,
             @Param("nameENG") String nameENG,
-            @Param("latitude") Float latitude,
-            @Param("longitude") Float longitude,
+            @Param("latitude") String latitude,
+            @Param("longitude") String longitude,
             @Param("minDraft") Float minDraft,
             @Param("sortByList") List<PaginationOrderQuery> sortBy);
 }

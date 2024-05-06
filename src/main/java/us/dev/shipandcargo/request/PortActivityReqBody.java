@@ -24,7 +24,7 @@ public class PortActivityReqBody {
     private PaginationProps pagination;
 
     @ApiModelProperty(example = "123456789", value = "Port ID")
-    private Long portId;
+    private String portId;
 
     @ApiModelProperty(example = "1234", value = "Ship Amount")
     private Long shipAmount;

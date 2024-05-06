@@ -12,7 +12,7 @@ public interface PortActivityDao {
 
     int insertPortActivity(PortActivity portActivity);
 
-    PortActivity selectPortActivityByPortId(@Param("portId") Long portId);
+    PortActivity selectPortActivityByPortId(@Param("portId") String portId);
 
     List<PortActivity> selectPortActivityByShipAmount(@Param("shipAmount") Long shipAmount);
 

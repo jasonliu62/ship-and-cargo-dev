@@ -23,22 +23,22 @@ public class PortService {
     private PortDao portDao;
 
     public int insertPort(Port port){
-        Long portId = port.getPortId();
+        String portId = port.getPortId();
         if (selectPortByPortId(portId) != null){
             throw new ApiException(ApiMessage.PORT_EXISTED);
         }
         return portDao.insertPort(port);
     }
 
-    public Port selectPortByPortId(Long portId) { return portDao.selectPortByPortId(portId); }
+    public Port selectPortByPortId(String portId) { return portDao.selectPortByPortId(portId); }
 
     public List<Port> selectPortByCName(String nameCHN) { return portDao.selectPortByCName(nameCHN); }
 
     public List<Port> selectPortByEName(String nameENG) { return portDao.selectPortByEName(nameENG); }
 
-    public List<Port> selectPortByLatitude(Float latitude) { return portDao.selectPortByLatitude(latitude); }
+    // public List<Port> selectPortByLatitude(Float latitude) { return portDao.selectPortByLatitude(latitude); }
 
-    public List<Port> selectPortByLongitude(Float longitude) { return portDao.selectPortByLongitude(longitude); }
+    // public List<Port> selectPortByLongitude(Float longitude) { return portDao.selectPortByLongitude(longitude); }
 
     public List<Port> selectPortByMinDraft(Float minDraft) { return portDao.selectPortByMinDraft(minDraft); }
 
@@ -46,9 +46,9 @@ public class PortService {
 
     public int deletePortByPortId(Long portId) { return portDao.deletePortByPortId(portId); }
 
-    public PageData<PortVo> listPort(PaginationProps paging, Long portId,
+    public PageData<PortVo> listPort(PaginationProps paging, String portId,
                                      String nameCHN, String nameENG,
-                                     Float latitude, Float longitude,
+                                     String latitude, String longitude,
                                      Float minDraft){
         PageHelper.startPage(paging.getCurrent(), paging.getPageSize());
         List<Port> ports = portDao.queryByCondition(portId, nameCHN, nameENG, latitude, longitude, minDraft,paging.getSortByToList());

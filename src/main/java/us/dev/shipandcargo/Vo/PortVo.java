@@ -11,13 +11,13 @@ import lombok.Setter;
 @ApiModel(value = "PortVo", description = "Basic info of the port")
 public class PortVo {
 
-    private Long portId;
+    private String portId;
     private String nameCHN;
     private String nameENG;
     // 经度
-    private Float latitude;
+    private String latitude;
     // 纬度
-    private Float longitude;
+    private String longitude;
     // 港口最小水深
     private Float minDraft;
 
