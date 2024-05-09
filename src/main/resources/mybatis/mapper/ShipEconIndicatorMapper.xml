@@ -22,7 +22,8 @@
             oilPrice = #{oilPrice},
             chartType = #{chartType},
             charterTime = #{charterTime},
-            dailyRent = #{dailyRent}
+            dailyRent = #{dailyRent},
+            speed = #{speed},
         WHERE imo = #{imo} AND selectorId = #{selectorId}
     </update>
 

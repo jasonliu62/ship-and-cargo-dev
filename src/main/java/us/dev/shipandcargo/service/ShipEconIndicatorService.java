@@ -86,6 +86,8 @@ public class ShipEconIndicatorService {
         shipEconIndicatorVo.setChartType(shipEconIndicator.getChartType());
         shipEconIndicatorVo.setOilPrice(shipEconIndicator.getOilPrice());
         shipEconIndicatorVo.setOilConsumption(shipEconIndicator.getOilConsumption());
+        // 加个speed
+        shipEconIndicatorVo.setSpeed(shipEconIndicator.getSpeed());
         return shipEconIndicatorVo;
     }
 }
