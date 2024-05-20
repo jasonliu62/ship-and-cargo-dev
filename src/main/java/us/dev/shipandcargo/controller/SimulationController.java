@@ -85,7 +85,7 @@ public class SimulationController {
         newAlgorithmReqBody.setCargoNeedList(reqBody.getCargoNeedList());
         newAlgorithmReqBody.setUploaderId(uploaderId);
 
-        String url = "http://106.55.105.246:3030/algorithm/calculation";
+        String url = "http://localhost:3030/algorithm/calculation";
         Result<?> response = restTemplate.postForObject(url, newAlgorithmReqBody, Result.class);
 
         return Result.success(response);
@@ -120,8 +120,7 @@ public class SimulationController {
         newAlgorithmReqBody.setCargoNeedList(cargoNeedList);
         newAlgorithmReqBody.setUploaderId(uploaderId);
 
-        String url = "http://106.55.105.246:3030/algorithm/calculation";
-        // String url = "http://localhost:3030/algorithm/calculation";
+        String url = "http://localhost:3030/algorithm/calculation";
         Result<?> response = restTemplate.postForObject(url, newAlgorithmReqBody, Result.class);
 
         return Result.success(response);
