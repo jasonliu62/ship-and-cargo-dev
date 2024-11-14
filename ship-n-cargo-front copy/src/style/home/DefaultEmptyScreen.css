@@ -1,0 +1,24 @@
+.empty-space {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 250%;
+    height: 100%;
+    margin: auto;
+}
+
+.empty-space img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.empty-space h1 {
+    margin-bottom: 10px;
+}
+
+.empty-space p {
+    font-size: 18px;
+}

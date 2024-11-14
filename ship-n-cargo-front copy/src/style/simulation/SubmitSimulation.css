@@ -1,0 +1,19 @@
+.loading-overlay {
+    position: fixed; /* Position fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 1050; /* High z-index to ensure it's above other content */
+    color: white; /* White text */
+}
+
+.spinner-border {
+    width: 3rem; /* Increase spinner size */
+    height: 3rem; /* Increase spinner size */
+    margin-right: 10px; /* Space between spinner and text */
+}

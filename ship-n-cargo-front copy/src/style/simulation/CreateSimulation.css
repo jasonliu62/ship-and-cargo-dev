@@ -1,0 +1,20 @@
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 140%;
+    text-align: center;
+}
+
+.imgbar{
+    width: 1000px;
+    height: auto;
+
+}
+
+.simbg{
+    width: 1000px;
+    height: auto;
+}

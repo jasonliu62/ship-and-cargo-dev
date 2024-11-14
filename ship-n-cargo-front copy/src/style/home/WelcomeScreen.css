@@ -1,0 +1,48 @@
+.background-image {
+    position: relative;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.button-prev, .button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.button-prev {
+    left: 10px;
+}
+
+.button-next {
+    right: 10px;
+}
+
+.start-button {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    font-size: 1.7rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 200px;
+    height: 60px;
+}
+
+.card-body-custom {
+    height: 440px;
+}
+
+.card-img-top-custom {
+    height: 250px;
+    width: auto;
+}
+
+.imgbar {
+    width: 100%;
+    height: auto;
+    align-self: center;
+}
